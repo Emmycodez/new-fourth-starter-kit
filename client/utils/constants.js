@@ -1,0 +1,5 @@
+export const TITLE_TAILWIND_CLASS = "text-2xl sm:text-2xl md:text-3xl lg:text-4xl"
+export const heroHeadline = "Forget About Handling Payments for your Paid Whatsapp"
+export const heroSubHeadline = "Protect your groups, Collect Payments and manage subscriptions"
+export const heroCTA = "Get Started"
+export const heroQuote="on Autopilot🚀"
