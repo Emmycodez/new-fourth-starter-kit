@@ -19,7 +19,7 @@ router.post("/api/getUser", async (request, response) => {
     }
 
     // Fetch the user from the database and populate the 'revenue' field
-    const user = await User.findOne({ uid }).populate("revenue");
+    const user = await User.findOne({ uid })
 
     // If user is not found, return a 404 response
     if (!user) {
