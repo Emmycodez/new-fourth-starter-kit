@@ -39,7 +39,7 @@ export default function GroupSettings({ group }) {
     <Card>
       <CardHeader>
         <CardTitle>Settings for {group.name}</CardTitle>
-        <CardDescription>Manage your group's settings and rules</CardDescription>
+        <CardDescription>Manage your group&apos;s settings and rules</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">

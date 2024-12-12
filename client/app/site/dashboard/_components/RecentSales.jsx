@@ -23,7 +23,7 @@ const RecentSales = ({ limit, salesData }) => {
           <div className="ml-4 space-y-1">
             <p className="font-semibold">{sale.customerName || "Unknown"}</p>
             <p className="text-sm text-muted-foreground">
-              {sale.whatsapp} || "N/A"
+              {sale.whatsapp} || &quot;N/A&quot;
             </p>
           </div>
           <div className="text-lg ml-auto font-medium">

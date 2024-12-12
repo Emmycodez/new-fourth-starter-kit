@@ -37,7 +37,7 @@ export default function GroupList({ onSelectGroup, data }) {
   if (groups?.length === 0) {
     return (
       <div className="flex justify-center items-center h-full text-center text-muted-foreground">
-        oops! Seems you haven't added the group shepherd bot to any of your
+        oops! Seems you haven&apos;t added the group shepherd bot to any of your
         groups yet
       </div>
     );
