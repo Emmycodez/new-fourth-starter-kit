@@ -5,7 +5,7 @@ const connectDB = async (dbUrl) => {
   try {
     await mongoose.connect(dbUrl),
       {
-        dbName: "GroupGuard",
+        dbName: "GroupShepherd",
       };
     console.log("Database connected....");
   } catch (error) {

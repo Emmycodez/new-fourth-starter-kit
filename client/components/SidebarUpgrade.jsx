@@ -25,7 +25,7 @@ const SidebarUpgrade = () => {
       <CardContent className="grid gap-2.5 p-4">
         <Button
           size="lg"
-          className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
+          className="w-full shadow-none"
         >
           Upgrade
         </Button>

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import DataTable from "./data-table/DataTable";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <DataTable />
+    </>
+  );
+};
 
-export default page
+export default page;

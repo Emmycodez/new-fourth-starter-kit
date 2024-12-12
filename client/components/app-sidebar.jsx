@@ -1,5 +1,5 @@
 import * as React from "react"
-import { LayoutDashboard, UsersRound, Zap, BellRing, ArrowRightLeft, Settings } from 'lucide-react';
+import { LayoutDashboard, UsersRound, Zap, BellRing, ArrowRightLeft, Settings, Boxes } from 'lucide-react';
 
 import { NavMain } from "@/components/nav-main"
 import { SidebarOptInForm } from "@/components/sidebar-opt-in-form"
@@ -25,6 +25,11 @@ const data = {
       url: "/site/dashboard",
       icon: <LayoutDashboard/>,
       
+    },
+    {
+      title: "Groups",
+      url: "/site/dashboard/groups",
+      icon: <Boxes/>,
     },
     {
       title: "Members",
@@ -67,7 +72,7 @@ export function AppSidebar({
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
                 <div
-                  className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  className="flex aspect-square size-8 items-center justify-center rounded-lg bg-blue-500 text-sidebar-primary-foreground">
                   <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">

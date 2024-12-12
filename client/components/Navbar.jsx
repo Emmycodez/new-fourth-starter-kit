@@ -7,64 +7,100 @@ import { logo } from "@/images";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // Hide Navbar on specific routes
   if (pathname.includes("/site/dashboard")) return null;
 
-  const NavLinks = () => (
-    <div className="flex gap-8 text-lg">
-      <Link href="" className="hover:underline">Pricing</Link>
-      <Link href="" className="hover:underline">Demo</Link>
-      <Link href="" className="hover:underline">FAQ</Link>
-    </div>
-  );
+  const navItems = [
+    { href: "/site/pricing", label: "Pricing" },
+    { href: "/site/demo", label: "Demo" },
+    { href: "/site/faq", label: "FAQ" },
+  ];
 
   return (
-    <div className="flex  min-w-full fixed justify-between  items-center py-2 px-4 border-b z-10 border-secondary">
-      {/* Logo Section */}
-      <div className="font-bold text-xl flex items-center justify-center">
-        <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
-        GroupGuard
-      </div>
+    <nav className="bg-background border-b border-secondary z-10 fixed w-full md-[25px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-evenly h-16">
+          {/* Logo Section */}
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
+              <span className="font-bold text-xl">GroupGuard</span>
+            </Link>
+          </div>
 
-      <div>
-        <NavLinks />
-      </div>
+          {/* Centered Navigation Links (hidden on mobile) */}
+          <div className="hidden md:flex flex-grow items-center justify-center space-x-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
 
-      {/* Avatar and Mode Toggle Section */}
-      <div className="flex items-center space-x-4">
-        <Avatar className="hidden md:block">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <ModeToggle />
+          {/* Avatar and Mode Toggle Section */}
+          <div className="flex items-center space-x-4">
+            <ModeToggle />
+            <Avatar className="hidden md:block">
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
 
-        {/* Hamburger Menu for Mobile */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-[1.2rem] w-[1.2rem]" />
-              <span className="sr-only">Toggle menu</span>
+            {/* Mobile Menu Toggle Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <div className="flex flex-col space-y-4 mt-4">
-              <NavLinks />
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-4 pt-4 pb-3 space-y-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block text-gray-700 hover:bg-gray-200 px-3 py-2 rounded-md text-base font-medium"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
-          </SheetContent>
-        </Sheet>
+            <div className="pt-4 pb-3 border-t border-gray-200">
+              <div className="flex items-center px-5 space-x-4">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-base font-medium leading-none">Tom Cook</span>
+                  <span className="text-sm text-gray-500">tom@example.com</span>
+                </div>
+                <div className="ml-auto">
+                  <ModeToggle />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </nav>
   );
 };
 

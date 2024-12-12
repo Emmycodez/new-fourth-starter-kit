@@ -6,12 +6,13 @@ import Link from "next/link";
 import {
   RegisterLink,
   LoginLink,
+  LogoutLink
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const HeroSection = () => {
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-b from-background to-background/80 py-24 sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-background to-background/80 pt-24 sm:pt-32 pb-35"
       aria-label="Group Guard hero section"
     >
       <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5"></div>
@@ -39,20 +40,14 @@ const HeroSection = () => {
               <RegisterLink>Get Started</RegisterLink>
             </Button>
             <Button size="lg" variant="outline" className="text-lg" asChild>
-              <div>
+              <div className="flex items-center gap-2">
                 <LoginLink>Go To Dashboard</LoginLink>
                 <CircleArrowRight />
               </div>
             </Button>
-          </div>
-          <div className="mt-12 relative">
-            <div
-              className="absolute inset-0 flex items-center"
-              aria-hidden="true"
-            >
-              <div className="w-full border-t border-muted"></div>
+            <div>
+              <LogoutLink>Logout</LogoutLink>
             </div>
-            <div className="relative flex justify-center"></div>
           </div>
         </div>
       </div>
@@ -61,3 +56,15 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+// utomated Member Approvals: Allow admins to set criteria for member approvals (e.g., answering questions, providing emails, etc.) before joining a group.
+// Anti-Spam & Auto-Moderation: Detect and block spam messages, links, or specific keywords to keep group chats clean.
+// Scheduled Messages: Enable scheduling announcements or reminders to be sent at specific times.
+// Member Analytics: Track member engagement, message frequency, and participation levels.
+// Automated Greetings: Send welcome messages to new members and farewell messages to those who leave.
+// Customizable Rules Enforcement: Automatically warn or remove members who break group rules.
+// Polls & Surveys: Create polls directly in the group chat for feedback or quick decisions.
+// Keyword Alerts: Notify admins when specific keywords are mentioned in the group.
+// Broadcast Messaging: Send announcements to multiple groups at once without the need to copy-paste.
+// Content Backup & Export: Save chat histories or export messages for record-keeping.
+// Would

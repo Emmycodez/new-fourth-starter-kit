@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Fourth Starter Kit",
+  title:"GroupGuard",
   description:
     "This is the starter kit i hope to use for my future projects, as i improve, i will imporove on it",
 };

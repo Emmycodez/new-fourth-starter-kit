@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -12,44 +11,48 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "A bar chart with a label";
-
+// Updated chart data with members and earnings
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "January", members: 186, earnings: 80 },
+  { month: "February", members: 305, earnings: 200 },
+  { month: "March", members: 237, earnings: 120 },
+  { month: "April", members: 73, earnings: 190 },
+  { month: "May", members: 209, earnings: 130 },
+  { month: "June", members: 214, earnings: 140 },
 ];
 
+// Define the chart configuration properly
 const chartConfig = {
-  desktop: {
+  members: {
     label: "Members",
     color: "hsl(var(--chart-1))",
   },
+  earnings: {
+    label: "Earnings",
+    color: "hsl(var(--chart-2))",
+  },
 };
 
-export function BarChartView() {
+export default function BarChartView({
+  chartData,
+  totalMembers,
+  totalEarnings,
+}) {
   return (
-    <Card  className="p-4 flex-1 basis-3/5">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Analytics</CardTitle>
+        <CardTitle>Analytics</CardTitle>
+        <CardDescription>Showing your growth for each month</CardDescription>
       </CardHeader>
       <CardContent>
+        {/* Ensure chartConfig is passed correctly */}
         <ChartContainer config={chartConfig}>
-          <BarChart
-            data={chartData}
-            margin={{
-              top: 20,
-            }}
-          >
+          <BarChart data={chartData} margin={{ top: 20 }}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
@@ -58,25 +61,24 @@ export function BarChartView() {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />
+
+            {/* Custom Tooltip for members and earnings */}
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground"
-                fontSize={12}
-              />
-            </Bar>
+
+            {/* Bars for members and earnings */}
+            <Bar dataKey="members" fill="rgba(59, 130, 246)" radius={4} />
+            <Bar dataKey="earnings" fill="rgba(22, 163, 74)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 font-medium leading-none"></div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for each month
-        </div>
+          Showing total members and earnings for each month
+        </div> 
       </CardFooter>
     </Card>
   );
