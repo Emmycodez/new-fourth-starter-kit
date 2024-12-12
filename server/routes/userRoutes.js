@@ -71,8 +71,7 @@ router.post("/api/createUser", async (request, response) => {
     }
 
     // If user already exists, populate revenue and return existing user data
-    user = await User.findById(user._id).populate("revenue");
-  
+    user = await User.findById(user._id)
     return response.status(200).json({ message: "User already exists", user });
   } catch (error) {
     console.error("Error creating/updating user:", error.message);
