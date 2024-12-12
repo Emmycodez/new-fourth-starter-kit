@@ -3,7 +3,9 @@ import Loading from '@/components/Loading'
 
 const Loading = () => {
   return (
-  <Loading/>
+  <div>
+    Loading...
+  </div>
   )
 }
 
