@@ -62,7 +62,7 @@ router.post("/api/createUser", async (request, response) => {
       });
 
       // Populate the revenue data before returning
-      user = await User.findById(user._id).populate("revenue");
+      user = await User.findById(user._id)
 
    
       return response
