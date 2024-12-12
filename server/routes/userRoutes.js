@@ -18,8 +18,8 @@ router.post("/api/getUser", async (request, response) => {
         .json({ success: false, message: "UID is required" });
     }
 
-    // Fetch the user from the database and populate the 'revenue' field
-    const user = await User.findOne({ uid })
+    // Fetch the user from the database
+    const user = await User.findOne({ uid });
 
     // If user is not found, return a 404 response
     if (!user) {
@@ -38,40 +38,36 @@ router.post("/api/getUser", async (request, response) => {
   }
 });
 
-
+// Route to create a new user
 router.post("/api/createUser", async (request, response) => {
   try {
     const { uid, firstName, lastName, email, image } = request.body;
-   
 
     // Check if the user already exists
     let user = await User.findOne({ uid });
 
     if (!user) {
-      // Create a new revenue entry
-      const newRevenue = await Revenue.create({});
-
-      // Create a new user with the associated revenue
+      // Create a new user without the revenue field
       user = await User.create({
         uid,
         firstName,
         lastName,
         email,
         image,
-        revenue: newRevenue._id,
       });
 
-      // Populate the revenue data before returning
-      user = await User.findById(user._id)
+      // Now you can handle revenue separately (e.g., after user subscribes, etc.)
+      // Example of how to create and associate revenue later
+      // const newRevenue = await Revenue.create({ user: user._id });
+      // user.revenue = newRevenue._id;
+      // await user.save();
 
-   
       return response
         .status(201)
         .json({ message: "User created successfully", user });
     }
 
-    // If user already exists, populate revenue and return existing user data
-    user = await User.findById(user._id)
+    // If user already exists, return existing user data
     return response.status(200).json({ message: "User already exists", user });
   } catch (error) {
     console.error("Error creating/updating user:", error.message);
@@ -80,6 +76,5 @@ router.post("/api/createUser", async (request, response) => {
       .json({ success: false, message: error.message });
   }
 });
-
 
 export default router;
