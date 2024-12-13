@@ -1,11 +1,10 @@
-
 export const createUser = async (user) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/createUser`,
       {
         method: "POST",
-        cache: "no-store",
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -40,7 +39,7 @@ export const getMyUser = async (uid) => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getUser`,
       {
         method: "POST",
-        cache: "no-store",
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -92,7 +91,7 @@ export const setGroupRules = async (data, userId) => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/telegram/set-rules`,
       {
         method: "POST",
-        cache: "no-store",
+
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId,
@@ -123,34 +122,33 @@ export const setGroupRules = async (data, userId) => {
 };
 
 export const handleDeleteGroup = async (groupId) => {
- try {
-  if (!groupId) {
-    console.log("Group Id must be provided");
-    return;
-  }
-
- 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/deleteGroup`,
-    {
-      method: "POST",
-      cache: "no-store",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ groupId }),
+  try {
+    if (!groupId) {
+      console.log("Group Id must be provided");
+      return;
     }
-  );
 
-  if(!response.ok) {
-    const errorDetails = await response.json();
-    console.error(`Error deleting group: ${errorDetails.message}`)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/deleteGroup`,
+      {
+        method: "POST",
+
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ groupId }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error(`Error deleting group: ${errorDetails.message}`);
+    }
+
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting group:", error.message);
+    return { message: error.message || "Unexpected error occurred." };
   }
-
-  const data = response.json();
-  return data;
- } catch (error) {
-  console.error("Error deleting group:", error.message);
-  return { message: error.message || "Unexpected error occurred." };
- }
 };
 
 export const fetchQrCode = async () => {
@@ -159,7 +157,7 @@ export const fetchQrCode = async () => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/get-qr`,
       {
         method: "GET",
-        cache: "no-store",
+
         headers: {
           "Content-Type": "application/json",
         },

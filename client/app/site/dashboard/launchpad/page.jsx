@@ -23,6 +23,10 @@ const Page = async () => {
 
   let telegramConnected = data?.telegramConnected;
 
+  if(!id) {
+    return;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <h1 className="text-4xl font-bold">Welcome to Launchpad</h1>
