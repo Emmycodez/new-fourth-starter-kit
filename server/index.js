@@ -14,11 +14,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: "*", // Allow all origins (or specify your frontend URL)
+    origin: "https://groupshepherd.vercel.app", // Specify your frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
 );
+
 
 const port = process.env.PORT || 4000;
 

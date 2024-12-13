@@ -11,7 +11,7 @@ dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 // const websiteUrl = process.env.WEBSITE_URL;
-const websiteUrl = "https://google.com";
+const websiteUrl = process.env.WEBSITE_URL;
 
 // Start command with interactive buttons
 // Start command with interactive buttons
