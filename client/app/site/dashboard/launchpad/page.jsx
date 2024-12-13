@@ -17,15 +17,25 @@ import { getMyUser } from "@/actions/queries";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
-  const { id, email } = user;
-  const data = await getMyUser(id);
+  let user = await getUser();
+  let { id, email } = user || {}; // Ensure id is destructured correctly, even if user is undefined
 
-  let telegramConnected = data?.telegramConnected;
+  if (!id) {
+    // If there's no id, try to get the user again
+    user = await getUser();
 
-  if(!id) {
-    return;
+    // If there's still no user or no id, handle the fallback
+    if (!user?.id) {
+      // Handle the case when the user is not found or the id is missing
+      console.log("User ID is missing. Redirecting or displaying error...");
+      return; // Or maybe redirect to a login page or display an error message
+    }
+    id = user.id; // Update id if found
+    email = user.email;
   }
+
+  const data = await getMyUser(id);
+  let telegramConnected = data?.telegramConnected;
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
@@ -130,3 +140,5 @@ const Page = async () => {
 };
 
 export default Page;
+
+
