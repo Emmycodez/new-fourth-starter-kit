@@ -65,7 +65,7 @@ export default function PaymentForm({ groupId, groupName }) {
           Start Your Payment Process
         </CardTitle>
         <CardDescription className="text-center mt-4">
-          You're just one step away from gaining access to the{" "}
+          You&apos;re just one step away from gaining access to the{" "}
           <span className="font-bold">{groupName}</span> community and all its
           benefits.
         </CardDescription>
@@ -129,7 +129,7 @@ export default function PaymentForm({ groupId, groupName }) {
       </CardContent>
       <CardFooter>
         <p className="text-xs text-gray-500 text-center w-full">
-          By clicking 'Proceed to Payment', you agree to our Terms of Service
+          By clicking &apos;Proceed to Payment&apos;, you agree to our Terms of Service
           and Privacy Policy.
         </p>
       </CardFooter>
