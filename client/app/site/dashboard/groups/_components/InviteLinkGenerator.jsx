@@ -1,36 +1,45 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-import { RefreshCw, Copy } from 'lucide-react'
-import { toast } from '@/hooks/use-toast'
+import { RefreshCw, Copy } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 export default function InviteLinkGenerator({ group }) {
-  const [inviteLink, setInviteLink] = useState('');
+  const [inviteLink, setInviteLink] = useState("");
   console.log("This is the group passed to the invitelink generator: ", group);
 
   const generateInviteLink = () => {
-    // Here you would typically make an API call to generate a unique invite link
-    const groupSlug = group?.groupName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    const newLink = `https://yourdomain.com/join/${groupSlug}-${group.id}/${Math.random().toString(36).substring(7)}`;
-    setInviteLink(newLink)
-  }
+    const newLink = `${
+      process.env.NEXT_PUBLIC_DOMAIN_URL
+    }/site/invite/${group._id}`;
+    setInviteLink(newLink);
+  };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(inviteLink)
+    navigator.clipboard.writeText(inviteLink);
     toast({
       title: "Copied!",
       description: "Invite link copied to clipboard.",
-    })
-  }
+    });
+  };
 
   return (
     <Card className="mt-4">
       <CardHeader>
         <CardTitle>Invite Link</CardTitle>
-        <CardDescription>Generate and share the invite link for this paid group</CardDescription>
+        <CardDescription>
+          Generate and share the invite link for this paid group
+        </CardDescription>
       </CardHeader>
       <CardContent>
         {inviteLink ? (
@@ -53,10 +62,10 @@ export default function InviteLinkGenerator({ group }) {
       </CardContent>
       <CardFooter>
         <p className="text-sm text-muted-foreground">
-          This link will direct users to a payment page for your group. You can generate a new link at any time.
+          This link will direct users to a payment page for your group. You can
+          generate a new link at any time.
         </p>
       </CardFooter>
     </Card>
-  )
+  );
 }
-

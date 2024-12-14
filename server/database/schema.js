@@ -72,6 +72,7 @@ const groupSchema = new Schema(
     groupName: { type: String, required: true }, // Name of the group (from the form input)
     groupId: { type: String, unique: true, required: true }, // Telegram Group ID (generated after creating the group)
     groupDescription: { type: String }, // Description of the group (from the form input)
+    groupImage: {type: String},
     admin: { type: Schema.Types.ObjectId, ref: "User" }, // Reference to the admin (User model)
     participants: [{ type: Schema.Types.ObjectId, ref: "Member" }], // Members in the group
     membersCount: { type: Number, default: 0 }, // Number of members in the group

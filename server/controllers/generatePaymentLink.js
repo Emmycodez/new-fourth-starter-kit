@@ -1,10 +1,11 @@
 import axios from "axios";
 import { Telegraf } from "telegraf";
 import dotenv from "dotenv";
+import {bot} from "../routes/telegramRoutes.js";
  
 dotenv.config();
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+// const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Function to generate the Telegram invite link
 export const generateTelegramInviteLink = async (chatId) => {

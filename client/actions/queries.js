@@ -151,6 +151,23 @@ export const handleDeleteGroup = async (groupId) => {
   }
 };
 
+export const getGroupDetails = async (groupId) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getGroupDetails?groupId=${groupId}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user groups: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching group details:", error.message);
+  }
+};
+
 export const fetchQrCode = async () => {
   try {
     const response = await fetch(

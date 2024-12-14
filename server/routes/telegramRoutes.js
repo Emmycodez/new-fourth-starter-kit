@@ -9,7 +9,7 @@ import { generatePaymentLink } from "../controllers/generatePaymentLink.js";
 
 dotenv.config();
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN, {polling: true});
 // const websiteUrl = process.env.WEBSITE_URL;
 const websiteUrl = process.env.WEBSITE_URL;
 
