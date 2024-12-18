@@ -1,30 +1,27 @@
-// import { Group } from "../database/schema.js";
 
-// export const createGroup = async (client, groupName, adminId) => {
-//   try {
-//     const adminUser = await User.findById(adminId);
-//     if (!adminUser) {
-//       throw new Error('Admin user not found');
-//     }
+import { Group } from '../database/schema.js';
+import { createProductInLemonSqueezy } from '../utils/lemonSqueezy.js';
 
-//     // Create a WhatsApp group with the admin as the initial participant
-//     const chat = await client.createGroup(groupName, [adminUser.whatsappId]);
-//     const inviteLink = await chat.getInviteCode();
+const createPaymentLink = async (req, res) => {
+  try {
+    const { groupId } = req.body;
 
-//     // Save group details to MongoDB
-//     const newGroup = new Group({
-//       groupName,
-//       groupId: chat.id._serialized,
-//       admin: adminUser._id,
-//       inviteLink: `https://chat.whatsapp.com/${inviteLink}`,
-//     });
+    // Fetch group details from MongoDB
+    const group = await Group.findById(groupId).populate('admin').populate('participants');
 
-//     await newGroup.save();
-//     console.log('Group created successfully:', newGroup);
+    if (!group) {
+      return res.status(404).json({ error: 'Group not found' });
+    }
 
-//     return newGroup;
-//   } catch (error) {
-//     console.error('Failed to create group:', error);
-//     throw error;
-//   }
-// };
+    // Now pass the group data to create the product in Lemon Squeezy
+    const productData = await createProductInLemonSqueezy(group);
+
+    // Return the payment link
+    return res.json({ paymentUrl: productData.checkoutUrl });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'An error occurred while creating the payment link' });
+  }
+};
+
+export { createPaymentLink };

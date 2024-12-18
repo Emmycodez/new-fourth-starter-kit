@@ -1,6 +1,7 @@
 import { Router } from "express";
 import dotenv from "dotenv";
 import { Group } from "../database/schema.js";
+import { createPaymentLink } from "../controllers/groupController.js";
 
 dotenv.config();
 
@@ -67,5 +68,8 @@ router.get("/api/getGroupDetails", async (req, res) => {
       .json({ success: false, message: "Internal server error" });
   }
 });
+
+
+router.post('/api/create-payment-link', createPaymentLink);
 
 export default router;

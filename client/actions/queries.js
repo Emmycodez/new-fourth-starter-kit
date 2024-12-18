@@ -62,6 +62,38 @@ export const getMyUser = async (uid) => {
     throw error; // Optionally rethrow the error for further handling
   }
 };
+export const generatePaymentLink = async (groupId) => {
+  if (!groupId) {
+    console.log("Group Id must be provided");
+    return;
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/create-payment-link`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          groupId,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error(`Error generating payment link: ${errorDetails.message}`);
+      return null;
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error generating payment link:", error.message);
+    return null;
+  }
+};
 
 export const getUserGroups = async (uid) => {
   try {
@@ -117,6 +149,43 @@ export const setGroupRules = async (data, userId) => {
     return res;
   } catch (error) {
     console.error("Error setting group settings:", error.message);
+    return { message: error.message || "Unexpected error occurred." };
+  }
+};
+
+export const createMember = async (data, groupId, userId) => {
+  if (!data || !groupId || !userId) {
+    console.log("data or groupId  or userId is missing");
+    return;
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/createMember`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          groupId,
+          firstname: data?.firstName,
+          lastName: data?.lastName,
+          email: data?.email,
+          countryCode: data?.countryCode,
+          phone: data?.phoneNumber,
+          userId,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error(`Error setting group settings: ${errorDetails.message}`);
+      // You can throw the error message from the backend to be handled by the catch block
+      throw new Error(errorDetails.message || "Failed to set group settings.");
+    }
+    const res = await response.json();
+    return res;
+  } catch (error) {
+    console.error("Error creating member:", error.message);
     return { message: error.message || "Unexpected error occurred." };
   }
 };

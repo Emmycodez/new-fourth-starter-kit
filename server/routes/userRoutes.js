@@ -7,8 +7,6 @@ const router = Router();
 
 // Route to fetch user data
 router.post("/api/getUser", async (request, response) => {
-
-  console.log("Attempting to get user");
   try {
     // Extract 'uid' from request body
     const { uid } = request.body;
@@ -42,7 +40,6 @@ router.post("/api/getUser", async (request, response) => {
 
 // Route to create a new user
 router.post("/api/createUser", async (request, response) => {
-  console.log("Attempting to create user");
   try {
     const { uid, firstName, lastName, email, image } = request.body;
 

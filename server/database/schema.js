@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, trusted } from "mongoose";
 
 // User Schema
 const userSchema = new Schema(
@@ -49,13 +49,17 @@ const memberSchema = new Schema(
   {
     firstName: { type: String, required: true }, // Member's first name
     lastName: { type: String, required: true }, // Member's last name
-    telegramId: { type: String, required: true, unique: true }, // Member's unique Telegram ID
+    countryCode: { type: String, required: true },
+    phoneNumber: { type: String, required: true }, // Member's phone number (optional)
+    email: { type: String, required: true }, // Member's email (optional)
+    telegramId: { type: String,}, // Member's unique Telegram ID
     subscriptionStatus: {
       type: String,
       enum: ["active", "inactive", "expired"],
       default: "inactive",
     }, // Current status of the subscription
     group: { type: Schema.Types.ObjectId, ref: "Group" }, // Reference to the group the member belongs to
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     joinedDate: { type: Date, default: Date.now }, // When the member joined the group
     subscriptionStart: { type: Date }, // Start date of their subscription
     subscriptionExpiry: { type: Date }, // Expiry date of the subscription
@@ -72,7 +76,7 @@ const groupSchema = new Schema(
     groupName: { type: String, required: true }, // Name of the group (from the form input)
     groupId: { type: String, unique: true, required: true }, // Telegram Group ID (generated after creating the group)
     groupDescription: { type: String }, // Description of the group (from the form input)
-    groupImage: {type: String},
+    groupImage: { type: String },
     admin: { type: Schema.Types.ObjectId, ref: "User" }, // Reference to the admin (User model)
     participants: [{ type: Schema.Types.ObjectId, ref: "Member" }], // Members in the group
     membersCount: { type: Number, default: 0 }, // Number of members in the group

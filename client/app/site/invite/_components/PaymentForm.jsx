@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createMember, generatePaymentLink } from "@/actions/queries";
+import { toast } from "@/hooks/use-toast";
 
 // This is a simplified list of country codes. You may want to expand this.
 const countryCodes = [
@@ -30,32 +32,57 @@ const countryCodes = [
   // Add more country codes as needed
 ];
 
-export default function PaymentForm({ groupId, groupName }) {
+export default function PaymentForm({ groupId, groupName, userId }) {
   const [fullName, setFullName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const phoneNum = countryCode + phoneNumber;
+  const data = {
+    firstName,
+    lastName,
+    email,
+    countryCode,
+    phoneNumber,
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // This is a placeholder for the actual payment submission logic
-    console.log("Submitting payment for:", {
-      groupId,
-      firstName,
-      lastName,
-      email,
-      phoneNum,
-      
-    });
-    // Normally, you would redirect to Lemon Squeezy here
-    alert(
-      "Form submitted! Normally, you would be redirected to the payment page."
-    );
+    setIsLoading(true);
+    try {
+      const [response, urlResponse] = await Promise.all([
+        createMember(data, groupId, userId),
+        generatePaymentLink(groupId),
+      ]);
+
+      if (response.error) {
+        setIsLoading(false);
+        toast({
+          title: "Failed to create member",
+          variant: "destructive",
+          description: "Please try again later",
+        });
+        
+      } else {
+        toast({
+          title: "Member created successfully",
+          description: "Your member details have been successfully saved",
+        });
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error("Error creating member: ", error.message);
+      toast({
+        title: "Failed to create member",
+        variant: "destructive",
+        description: error.message,
+      });
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -73,13 +100,23 @@ export default function PaymentForm({ groupId, groupName }) {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="fullName">Full Name</Label>
+            <Label htmlFor="firstName">First Name</Label>
             <Input
-              id="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               required
-              placeholder="John Doe"
+              placeholder="John"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              placeholder="Doe"
             />
           </div>
           <div className="space-y-2">
@@ -123,14 +160,14 @@ export default function PaymentForm({ groupId, groupName }) {
             We value your privacy. Your details are securely stored.
           </div>
           <Button type="submit" className="w-full">
-            Proceed to Payment
+            {isLoading? "Creating member..." : "Proceed to Payment"}
           </Button>
         </form>
       </CardContent>
       <CardFooter>
         <p className="text-xs text-gray-500 text-center w-full">
-          By clicking &apos;Proceed to Payment&apos;, you agree to our Terms of Service
-          and Privacy Policy.
+          By clicking &apos;Proceed to Payment&apos;, you agree to our Terms of
+          Service and Privacy Policy.
         </p>
       </CardFooter>
     </Card>
