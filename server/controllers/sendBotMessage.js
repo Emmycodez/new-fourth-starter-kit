@@ -1,7 +1,7 @@
 import { Telegraf } from "telegraf";
 import dotenv from "dotenv";
+import { bot } from "../routes/telegramRoutes.js";
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
 
 export const sendBotMessage = async (telegramId, message) => {
   try {

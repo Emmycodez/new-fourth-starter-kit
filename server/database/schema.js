@@ -11,7 +11,7 @@ const userSchema = new Schema(
     uid: { type: String, unique: true, required: true },
 
     // Telegram Integration
-    telegramId: { type: String, unique: true }, // User's Telegram ID
+    telegramId: { type: String}, // User's Telegram ID
     telegramUsername: { type: String }, // Telegram Username (optional)
     telegramConnected: { type: Boolean, default: false }, // Whether the user has connected their Telegram account
 
