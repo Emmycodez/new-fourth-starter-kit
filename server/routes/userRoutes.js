@@ -1,6 +1,7 @@
 import { Router } from "express";
 import dotenv from "dotenv";
 import { Revenue, User } from "../database/schema.js";
+import { generateRandomLetterSequence } from "../controllers/generateRandomStrings.js";
 
 dotenv.config();
 const router = Router();
@@ -45,6 +46,7 @@ router.post("/api/createUser", async (request, response) => {
 
     // Check if the user already exists
     let user = await User.findOne({ uid });
+    const telegramId = generateRandomLetterSequence(10);
 
     if (!user) {
       // Create a new user without the revenue field
@@ -54,6 +56,7 @@ router.post("/api/createUser", async (request, response) => {
         lastName,
         email,
         image,
+        telegramId,
       });
 
       // Now you can handle revenue separately (e.g., after user subscribes, etc.)

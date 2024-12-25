@@ -62,8 +62,70 @@ export const getMyUser = async (uid) => {
     throw error; // Optionally rethrow the error for further handling
   }
 };
-export const generatePaymentLink = async (groupId) => {
+
+export const setPaymentLink = async (groupId, link) => {
+  if (!groupId || !link) {
+    console.log("Group Id must be provided");
+    return;
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/setPaymentLink`,
+      {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify({
+          groupId,
+          link,
+        }),
+      }
+    );
+
+    if (response.error) {
+      throw new Error(
+        `Failed to set user payment link: ${response.statusText}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error setting payment link:", error.message);
+    return null;
+  }
+};
+
+export const getPaymentLink = async (groupId) => {
   if (!groupId) {
+    console.log("Group Id must be provided");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getPaymentLink?groupId=${groupId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch payment link: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching payment link:", error.message);
+    return null;
+  }
+};
+
+export const generatePaymentLink = async (groupId, memberId) => {
+  if (!groupId || !memberId) {
     console.log("Group Id must be provided");
     return;
   }
@@ -77,6 +139,7 @@ export const generatePaymentLink = async (groupId) => {
         },
         body: JSON.stringify({
           groupId,
+          memberId
         }),
       }
     );

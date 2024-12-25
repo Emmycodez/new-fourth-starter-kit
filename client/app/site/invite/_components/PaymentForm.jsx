@@ -33,7 +33,6 @@ const countryCodes = [
 ];
 
 export default function PaymentForm({ groupId, groupName, userId }) {
-  const [fullName, setFullName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,10 +53,27 @@ export default function PaymentForm({ groupId, groupName, userId }) {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const [response, urlResponse] = await Promise.all([
-        createMember(data, groupId, userId),
-        generatePaymentLink(groupId),
-      ]);
+      // const [response, urlResponse] = await Promise.all([
+      //   createMember(data, groupId, userId),
+      //   generatePaymentLink(groupId,memberId ),
+      // ]);
+
+      const response = await createMember(data, groupId, userId);
+
+      const memberId = response.newMember._id;
+      const urlResponse = await generatePaymentLink(groupId, memberId);
+
+      console.log(
+        "this is the response from the create member function: ",
+        response
+      );
+
+      
+
+      console.log(
+        "this is the url response from the generate payment link function: ",
+        urlResponse
+      );
 
       if (response.error) {
         setIsLoading(false);
@@ -66,13 +82,26 @@ export default function PaymentForm({ groupId, groupName, userId }) {
           variant: "destructive",
           description: "Please try again later",
         });
-        
       } else {
         toast({
           title: "Member created successfully",
           description: "Your member details have been successfully saved",
         });
         setIsLoading(false);
+        console.log(
+          "This is the response after the member fills the order form: ",
+          urlResponse
+        );
+        const monthlyUrl = urlResponse.paymentLinks.monthly;
+        const yearlyUrl = urlResponse.paymentLinks.yearly;
+        const metaData = {
+          yearlyUrl,
+          monthlyUrl,
+          groupId,
+        };
+
+        const encodedMetaData = encodeURIComponent(JSON.stringify(metaData));
+        router.push(`/site/confirm/${encodedMetaData}`);
       }
     } catch (error) {
       console.error("Error creating member: ", error.message);
@@ -160,7 +189,7 @@ export default function PaymentForm({ groupId, groupName, userId }) {
             We value your privacy. Your details are securely stored.
           </div>
           <Button type="submit" className="w-full">
-            {isLoading? "Creating member..." : "Proceed to Payment"}
+            {isLoading ? "Creating member..." : "Proceed to Payment"}
           </Button>
         </form>
       </CardContent>

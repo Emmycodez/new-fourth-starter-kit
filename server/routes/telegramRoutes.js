@@ -5,7 +5,7 @@ import { bold } from "telegraf/format";
 import { retry } from "../controllers/retry.js"; // Import the retry function
 import { Group, User } from "../database/schema.js";
 import { sendBotMessage } from "../controllers/sendBotMessage.js";
-import { generatePaymentLink } from "../controllers/generatePaymentLink.js";
+import { generatePaymentLink, generateTelegramInviteLink } from "../controllers/generatePaymentLink.js";
 
 dotenv.config();
 

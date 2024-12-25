@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Trash, Users } from "lucide-react";
 import { handleDeleteGroup } from "@/actions/queries";
 import { toast } from "@/hooks/use-toast";
+import CopyInviteLink from "./CopyInviteLink";
 
 export default function GroupList({ onSelectGroup, data }) {
   const router = useRouter();
@@ -78,6 +79,7 @@ export default function GroupList({ onSelectGroup, data }) {
               >
                 {group?.status || "active"}
               </Badge>
+              <CopyInviteLink groupId={group._id} />
               <Button
                 variant="ghost"
                 size="icon"

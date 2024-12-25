@@ -24,14 +24,14 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-background border-b border-secondary z-10 fixed w-full md-[25px]">
+    <nav className="bg-background border-b border-secondary z-10 fixed w-full md-[25px]mb-[70px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-evenly h-16">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-2">
               <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
-              <span className="font-bold text-xl">GroupGuard</span>
+              <span className="font-bold text-xl">GroupShepherd</span>
             </Link>
           </div>
 

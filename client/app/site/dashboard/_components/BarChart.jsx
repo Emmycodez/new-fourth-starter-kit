@@ -17,14 +17,14 @@ import {
 } from "@/components/ui/chart";
 
 // Updated chart data with members and earnings
-const chartData = [
-  { month: "January", members: 186, earnings: 80 },
-  { month: "February", members: 305, earnings: 200 },
-  { month: "March", members: 237, earnings: 120 },
-  { month: "April", members: 73, earnings: 190 },
-  { month: "May", members: 209, earnings: 130 },
-  { month: "June", members: 214, earnings: 140 },
-];
+// const chartData = [
+//   { month: "January", members: 186, earnings: 80 },
+//   { month: "February", members: 305, earnings: 200 },
+//   { month: "March", members: 237, earnings: 120 },
+//   { month: "April", members: 73, earnings: 190 },
+//   { month: "May", members: 209, earnings: 130 },
+//   { month: "June", members: 214, earnings: 140 },
+// ];
 
 // Define the chart configuration properly
 const chartConfig = {
@@ -38,11 +38,7 @@ const chartConfig = {
   },
 };
 
-export default function BarChartView({
-  chartData,
-  totalMembers,
-  totalEarnings,
-}) {
+export default function BarChartView({ totalMembers, totalEarnings, chartData }) {
   return (
     <Card>
       <CardHeader>
@@ -78,7 +74,7 @@ export default function BarChartView({
         <div className="flex gap-2 font-medium leading-none"></div>
         <div className="leading-none text-muted-foreground">
           Showing total members and earnings for each month
-        </div> 
+        </div>
       </CardFooter>
     </Card>
   );

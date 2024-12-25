@@ -2,7 +2,34 @@ import React from "react";
 import leads from "@/seed/leads";
 import { Ghost } from "lucide-react";
 
-const RecentSales = ({ limit, salesData }) => {
+const RecentSales = ({ limit,salesData }) => {
+  // const salesData = [
+  //   {
+  //     customerName: "Alice Johnson",
+  //     whatsapp: "+2348012345678",
+  //     amount: 15000,
+  //   },
+  //   {
+  //     customerName: "Bob Smith",
+  //     whatsapp: "+2348098765432",
+  //     amount: 20000,
+  //   },
+  //   {
+  //     customerName: "Cynthia Okafor",
+  //     whatsapp: "+2348056781234",
+  //     amount: 10000,
+  //   },
+  //   {
+  //     customerName: "David Wong",
+  //     whatsapp: "+2348034567890",
+  //     amount: 50000,
+  //   },
+  //   {
+  //     customerName: "Evelyn Green",
+  //     whatsapp: "+2348023456789",
+  //     amount: 30000,
+  //   },
+  // ];
   console.log("This is the recent sales data", salesData);
   if (salesData.length === 0)
     return (
@@ -15,6 +42,7 @@ const RecentSales = ({ limit, salesData }) => {
     );
   return (
     <div>
+      <h1 className="py-2 font-semibold text-foreground">Recent Sales Data</h1>
       {salesData.slice(0, limit).map((sale, index) => (
         <div key={index} className="flex items-center py-2">
           <div className="rounded-full h-9 w-9 ring-1 flex items-center justify-center bg-primary-foreground text-primary-background">
@@ -23,7 +51,7 @@ const RecentSales = ({ limit, salesData }) => {
           <div className="ml-4 space-y-1">
             <p className="font-semibold">{sale.customerName || "Unknown"}</p>
             <p className="text-sm text-muted-foreground">
-              {sale.whatsapp} || &quot;N/A&quot;
+              {sale.whatsapp} 
             </p>
           </div>
           <div className="text-lg ml-auto font-medium">

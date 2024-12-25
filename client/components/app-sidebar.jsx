@@ -76,7 +76,7 @@ export function AppSidebar({
                   <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">GroupGuard</span>
+                  <span className="font-semibold">Group Shepherd</span>
                   <span className="">v1.0.0</span>
                 </div>
               </a>

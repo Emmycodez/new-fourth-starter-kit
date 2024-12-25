@@ -80,7 +80,7 @@ const groupSchema = new Schema(
     admin: { type: Schema.Types.ObjectId, ref: "User" }, // Reference to the admin (User model)
     participants: [{ type: Schema.Types.ObjectId, ref: "Member" }], // Members in the group
     membersCount: { type: Number, default: 0 }, // Number of members in the group
-    inviteLink: { type: String }, // Invite link to the group (optional, could be generated after creating the group)
+    inviteLink: { type: String }, 
     createdAt: { type: Date, default: Date.now }, // When the group was created
     updatedAt: { type: Date, default: Date.now }, // Last updated time
     paymentType: { type: String, enum: ["one-time", "recurring"] }, // Payment type selected by the user (from the form input)

@@ -1,11 +1,28 @@
 import axios from "axios";
 import { Telegraf } from "telegraf";
 import dotenv from "dotenv";
-import {bot} from "../routes/telegramRoutes.js";
- 
-dotenv.config();
+import { bot } from "../routes/telegramRoutes.js";
 
-// const bot = new Telegraf(process.env.BOT_TOKEN);
+dotenv.config();
+const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY;
+
+export const generatePaymentLink = async (yanshId) => {
+  try {
+    console.log(yanshId);
+  } catch (error) {}
+};
+
+const generatePermanentInviteLink = async (groupId) => {
+  try {
+    // Call the Telegram API to export a permanent invite link
+    const inviteLink = await bot.telegram.exportChatInviteLink(groupId);
+
+    return inviteLink;
+  } catch (error) {
+    console.error("Error generating invite link: ", error);
+    throw error;
+  }
+};
 
 // Function to generate the Telegram invite link
 export const generateTelegramInviteLink = async (chatId) => {
@@ -19,44 +36,158 @@ export const generateTelegramInviteLink = async (chatId) => {
 };
 
 // Function to generate the payment link with the Telegram invite link as the redirect URL
-export const generatePaymentLink = async (amount, productId, currency, chatId) => {
+
+export const generateCustomCheckoutLink = async (
+  paymentType,
+  paymentFrequency,
+  price,
+  userData
+) => {
+  if (!paymentType || !["recurring", "one-time"].includes(paymentType)) {
+    throw new Error("Invalid payment type. Must be 'recurring' or 'one-time'.");
+  }
+
+  if (
+    paymentType === "recurring" &&
+    !["monthly", "yearly"].includes(paymentFrequency)
+  ) {
+    throw new Error(
+      "Invalid payment frequency. Must be 'monthly' or 'yearly'."
+    );
+  }
+
+  if (!price || typeof price !== "number" || price <= 0) {
+    throw new Error("Invalid price. Must be a positive number.");
+  }
+
+  let variantId;
+
+  // Determine the variant ID based on payment type and frequency
+  if (paymentType === "recurring") {
+    variantId = paymentFrequency === "monthly" ? "638631" : "638633";
+  } else if (paymentType === "one-time") {
+    variantId = "638634";
+  }
+
+  const payload = {
+    variant_id: variantId,
+    custom_price: price * 100, // Convert price to cents if required by the API
+    customer: userData, // Include customer data (name, email, etc.)
+  };
+
   try {
-    // First, generate the Telegram invite link
-    const inviteLink = await generateTelegramInviteLink(chatId);
-
-    // If there was an error generating the invite link, return null
-    if (!inviteLink) {
-      return null;
-    }
-
-    // Make the API request to LemonSqueezy to generate the payment link
     const response = await axios.post(
-      "https://api.lemonsqueezy.com/v1/checkout-links",
-      {
-        data: {
-          type: "checkout-links",
-          attributes: {
-            product_id: productId, // The product ID associated with this group
-            price: amount, // The price for the user to pay
-            currency: currency, // The currency for the payment (e.g., 'USD', 'NGN')
-            customer_email: "", // Optional: If you want to pre-fill the email address
-            redirect_url: inviteLink, // Use the Telegram invite link as the redirect URL
-            cancel_url: "http://yourwebsite.com/cancel", // Redirect if payment is canceled
-          },
-        },
-      },
+      "https://api.lemonsqueezy.com/v1/checkout_links",
+      payload,
       {
         headers: {
-          Authorization: `Bearer ${process.env.LEMON_SQUEEZY_API_KEY}`,
-          "Content-Type": "application/vnd.api+json",
+          Authorization: `Bearer ${lemonSqueezyApiKey}`, // Ensure lemonSqueezyApiKey is defined
+          "Content-Type": "application/json",
         },
       }
     );
 
-    // Extract the payment link from the API response
-    return response.data.data.attributes.url; // This is the payment link URL returned by LemonSqueezy
+    if (response.data && response.data.data) {
+      return response.data.data.attributes.url; // Adjusted to match API response structure
+    } else {
+      throw new Error("Unexpected response structure from Lemon Squeezy API.");
+    }
   } catch (error) {
-    console.error("Error generating payment link:", error);
-    return null; // Return null if there was an error
+    console.error(
+      "Error generating checkout link:",
+      error.response?.data || error.message
+    );
+    throw new Error("Failed to generate checkout link. Please try again.");
   }
 };
+
+export const generateCheckoutUrls = async (
+  variantId,
+  customPrice,
+  userData,
+  group
+) => {
+  const storeId = "135761";
+  const telegramInviteLink = await generatePermanentInviteLink(group.groupId);
+
+  if (!storeId || !variantId) {
+    console.log("Invalid store or variant id");
+    return;
+  }
+  try {
+    const payload = {
+      data: {
+        type: "checkouts",
+        attributes: {
+          product_options: {
+            name: `${group.groupName} subscription page`,
+            redirect_url: telegramInviteLink,
+            receipt_button_text: "Go to your Telegram Community",
+            receipt_link_url: telegramInviteLink,
+          },
+          custom_price: customPrice, // Move inside `attributes`
+          checkout_data: {
+            custom: {
+              group_id: userData.group_id,
+              name: userData.name,
+              email: userData.email,
+              memberId: userData.memberId,
+            },
+          },
+        },
+        relationships: {
+          store: {
+            data: {
+              type: "stores",
+              id: storeId,
+            },
+          },
+          variant: {
+            data: {
+              type: "variants",
+              id: variantId,
+            },
+          },
+        },
+      },
+    };
+
+    const response = await axios.post(
+      "https://api.lemonsqueezy.com/v1/checkouts",
+      payload,
+      {
+        headers: {
+          Accept: "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json",
+          Authorization: `Bearer ${process.env.LEMON_SQUEEZY_API_KEY}`,
+        },
+      }
+    );
+
+    return response.data.data.attributes.url;
+  } catch (error) {
+    console.error(
+      "Error creating checkout: ",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+// Example usage
+// const paymentType = "recurring"; // 'one-time' or 'recurring'
+// const paymentFrequency = "monthly"; // 'monthly' or 'yearly'
+// const price = 5000; // Dynamic price from user input
+// const userData = {
+//   email: "user@example.com",
+//   name: "John Doe",
+//   // Add any other metadata you want to send
+// };
+
+// generateCustomCheckoutLink(paymentType, paymentFrequency, price, userData)
+//   .then((checkoutUrl) => {
+//     console.log("Checkout URL:", checkoutUrl);
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,17 @@ import GroupList from "./GroupList";
 import GroupSettings from "./GroupSettings";
 import CreateGroupDialog from "./CreateGroupDialog";
 import InviteLinkGenerator from "./InviteLinkGenerator";
+import PaymentLinkInput from "../../launchpad/_components/PaymentLinkInput";
+import CreateGroupForm from "./CreateGroupForm";
+import { getMyUser } from "@/actions/queries";
 
-export default function GroupsPage({ uid, groups }) {
+export default function GroupsPage({ uid, groups, user }) {
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  console.log("This is the user passed to the group page: ", user);
+
+
+
 
   return (
     <div className="container mx-auto py-10 w-full">
@@ -30,10 +37,7 @@ export default function GroupsPage({ uid, groups }) {
             <TabsTrigger value="groups">Groups</TabsTrigger>
             <TabsTrigger value="settings">Group Settings</TabsTrigger>
           </TabsList>
-          <Button onClick={() => setIsCreateDialogOpen(true)}>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create Paid Group
-          </Button>
+          <CreateGroupForm Groups={groups} user={user} />
         </div>
         <div>
           <TabsContent value="groups" className="mt-0">

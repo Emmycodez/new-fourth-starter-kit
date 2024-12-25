@@ -16,12 +16,9 @@ import { toast } from "@/hooks/use-toast";
 
 export default function InviteLinkGenerator({ group }) {
   const [inviteLink, setInviteLink] = useState("");
-  console.log("This is the group passed to the invitelink generator: ", group);
 
   const generateInviteLink = () => {
-    const newLink = `${
-      process.env.NEXT_PUBLIC_DOMAIN_URL
-    }/site/invite/${group._id}`;
+    const newLink = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/site/invite/${group._id}`;
     setInviteLink(newLink);
   };
 
@@ -62,8 +59,8 @@ export default function InviteLinkGenerator({ group }) {
       </CardContent>
       <CardFooter>
         <p className="text-sm text-muted-foreground">
-          This link will direct users to a payment page for your group. You can
-          generate a new link at any time.
+          This link will direct users to an optin form where they can input
+          their details and then guide them to make payment for your group.
         </p>
       </CardFooter>
     </Card>
