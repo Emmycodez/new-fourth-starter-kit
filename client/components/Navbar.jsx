@@ -9,6 +9,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,88 +25,112 @@ const Navbar = () => {
   if (pathname.includes("/site/dashboard")) return null;
 
   const navItems = [
+    { href: "/site/useCases", label: "Use Cases" },
+    { href: "/site/Demo", label: "Demo" },
     { href: "/site/pricing", label: "Pricing" },
-    { href: "/site/demo", label: "Demo" },
+    { href: "/site/demo", label: "Try It" },
     { href: "/site/faq", label: "FAQ" },
   ];
 
   return (
-    <nav className="bg-background border-b border-secondary z-10 fixed w-full md-[25px]mb-[70px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-evenly h-16">
-          {/* Logo Section */}
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
-              <span className="font-bold text-xl">GroupShepherd</span>
-            </Link>
-          </div>
+    <nav className="border-b px-4">
+      <div className="flex h-16 items-center px-4 justify-between">
+        {/* Logo Section */}
+        <div className="">
+          <Link href="/" className="flex items-center">
+            <Image src={logo} alt="GroupGuard" className="w-[40px] h-[40px]" />
+            <span className="font-bold text-xl">GroupShepherd</span>
+          </Link>
+        </div>
 
-          {/* Centered Navigation Links (hidden on mobile) */}
-          <div className="hidden md:flex flex-grow items-center justify-center space-x-6">
+        {/* Navigation Links Section */}
+        <div className="hidden lg:flex items-center justify-center font-semibold  text-lg">
+          <NavigationMenu>
+            <NavigationMenuList className="gap-12">
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.href}>
+                  <NavigationMenuLink asChild>
+                    <Link href={item.href}>{item.label}</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/pricing" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Pricing
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/faq" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  FAQ
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/faq" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  FAQ
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu> */}
+
+        {/* User Actions Section */}
+        <div className="flex items-center space-x-4 ">
+          <ModeToggle />
+          <Avatar className="hidden md:block">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+
+          {/* Mobile Menu Toggle Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden"
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </Button>
+        </div>
+      </div>
+      {/* mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-50 w-[200px] h-[400px] bg-background rounded-md border-2 border-primary">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0"
+            onClick={() => setIsMenuOpen(false)}
+          />
+
+          {/* Menu Content */}
+          <div className="relative z-10 flex flex-col items-start p-6 space-y-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="block hover:bg-gray-200 px-3 py-2 rounded-md text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
           </div>
-
-          {/* Avatar and Mode Toggle Section */}
-          <div className="flex items-center space-x-4">
-            <ModeToggle />
-            <Avatar className="hidden md:block">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-
-            {/* Mobile Menu Toggle Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-4 pt-4 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block text-gray-700 hover:bg-gray-200 px-3 py-2 rounded-md text-base font-medium"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <div className="pt-4 pb-3 border-t border-gray-200">
-              <div className="flex items-center px-5 space-x-4">
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col">
-                  <span className="text-base font-medium leading-none">Tom Cook</span>
-                  <span className="text-sm text-gray-500">tom@example.com</span>
-                </div>
-                <div className="ml-auto">
-                  <ModeToggle />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </nav>
   );
 };

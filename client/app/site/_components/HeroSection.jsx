@@ -1,53 +1,57 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { heroHeadline, heroQuote, heroSubHeadline } from "@/utils/constants";
-import { CircleArrowRight } from "lucide-react";
+import {
+  ArrowRightIcon,
+  ArrowRightToLine,
+  CircleArrowRight,
+} from "lucide-react";
 import Link from "next/link";
 import {
   RegisterLink,
   LoginLink,
-  LogoutLink
+  LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
+import Image from "next/image";
+import { telegram } from "@/images";
 
 const HeroSection = () => {
   return (
-    <section
-      className="relative overflow-hidden bg-gradient-to-b from-background to-background/80 pt-24 sm:pt-32 pb-35"
-      aria-label="Group Guard hero section"
-    >
-      <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5"></div>
+    <section className="bg-gradient-to-b from-background to-secondary/10 py-20 sm:py-32">
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center relative">
-          <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl md:text-6xl lg:text-6xl text-center relative inline-block">
-            {heroHeadline.split("Group").map((part, index) => (
-              <React.Fragment key={index}>
-                {part}
-                {index === 0 && (
-                  <span className="ml-2 relative inline-block">
-                    Groups
-                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-primary"></span>
-                  </span>
-                )}
-              </React.Fragment>
-            ))}
+          <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl md:text-6xl lg:text-7xl">
+            The easiest way to manage and monetize your telegram{" "}
+            <span className="underline">group</span>
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-xl sm:text-2xl text-muted-foreground">
             {heroSubHeadline}{" "}
-            <span className="font-normal">On Autopilot 🚀</span>
+            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-foreground">
+              On Autopilot
+            </span>
+            🚀
           </p>
-          <div className="mt-8 flex justify-center space-x-4">
-            <Button size="lg" className="text-lg animate-pulse" asChild>
-              <RegisterLink>Get Started</RegisterLink>
+          <div className="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 items-center">
+            <Button size="lg" className="text-lg w-full sm:w-auto" asChild>
+              <Link
+                href="/register"
+                className="flex items-center justify-center"
+              >
+                Get Started
+                <ArrowRightToLine className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg" asChild>
-              <div className="flex items-center gap-2">
-                <LoginLink>Go To Dashboard</LoginLink>
-                <CircleArrowRight />
-              </div>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg w-full sm:w-auto"
+              asChild
+            >
+              <Link href="/login" className="flex items-center justify-center">
+                Sign In
+                <ArrowRightIcon className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
-            <div>
-              <LogoutLink>Logout</LogoutLink>
-            </div>
           </div>
         </div>
       </div>
