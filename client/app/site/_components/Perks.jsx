@@ -42,11 +42,9 @@ const Perks = () => {
           </CardHeader>
           <CardContent>
             {problemText.slice(1).map((item, index) => (
-              <div className="flex items-center gap-2">
+              <div key={index} className="flex items-center gap-2">
                 <X className="text-red-500 " />
-                <p key={index} className="py-2">
-                  {item.text}
-                </p>
+                <p className="py-2">{item.text}</p>
               </div>
             ))}
           </CardContent>
@@ -58,11 +56,9 @@ const Perks = () => {
           </CardHeader>
           <CardContent>
             {solutionText.slice(1).map((item, index) => (
-              <div className="flex items-center gap-2">
+              <div key={index} className="flex items-center gap-2">
                 <Check className="text-green-500" />
-                <p key={index} className="py-2">
-                  {item.text}
-                </p>
+                <p className="py-2">{item.text}</p>
               </div>
             ))}
           </CardContent>

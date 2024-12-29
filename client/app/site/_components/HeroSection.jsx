@@ -14,6 +14,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Image from "next/image";
 import { telegram } from "@/images";
+import { Badge } from "@/components/ui/badge";
 
 const HeroSection = () => {
   return (
@@ -33,13 +34,10 @@ const HeroSection = () => {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 items-center">
             <Button size="lg" className="text-lg w-full sm:w-auto" asChild>
-              <Link
-                href="/register"
-                className="flex items-center justify-center"
-              >
+              <RegisterLink className="flex items-center justify-center">
                 Get Started
                 <ArrowRightToLine className="ml-2 h-5 w-5" />
-              </Link>
+              </RegisterLink>
             </Button>
             <Button
               size="lg"
@@ -47,13 +45,18 @@ const HeroSection = () => {
               className="text-lg w-full sm:w-auto"
               asChild
             >
-              <Link href="/login" className="flex items-center justify-center">
+              <LoginLink className="flex items-center justify-center">
                 Sign In
                 <ArrowRightIcon className="ml-2 h-5 w-5" />
-              </Link>
+              </LoginLink>
             </Button>
           </div>
         </div>
+      </div>
+      <div className="flex items-center justify-center mt-[50px]">
+        <Badge className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white border-0  py-2 px-4 rounded-full w-auto text-md md:text-xl">
+          Free until you reach your first 10 paying members ✨
+        </Badge>
       </div>
     </section>
   );
