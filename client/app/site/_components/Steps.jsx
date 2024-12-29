@@ -36,7 +36,7 @@ const Steps = () => {
       {/* The heading */}
       <div className="max-w-screen-xl mx-auto flex items-center justify-center flex-col md:flex-row text-center lg:max-w-3xl mb-[70px]">
         <div className="font-display font-bold tracking-tight text-3xl text-center">
-          You're <span className="text-muted-foreground">three easy steps</span>{" "}
+          You&apos;re <span className="text-muted-foreground">three easy steps</span>{" "}
           away monetizing your telegram groups
         </div>
       </div>
