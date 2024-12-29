@@ -54,7 +54,7 @@ const HeroSection = () => {
         </div>
       </div>
       <div className="flex items-center justify-center mt-[50px]">
-        <Badge className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white border-0  py-2 px-4 rounded-full w-auto text-md md:text-xl">
+        <Badge className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white border-0  py-2 px-4 rounded-full w-auto text-md md:text-xl sm:text-sm text-center">
           Free until you reach your first 10 paying members ✨
         </Badge>
       </div>
