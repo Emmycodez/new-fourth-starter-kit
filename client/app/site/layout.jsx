@@ -12,20 +12,27 @@ const poppins = Poppins({
   display: "swap",
 });
 
+
 const SiteLayout = ({ children }) => {
   return (
-    <ThemesProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <div className={`${poppins.className} `}>
-        <Navbar />
-        {children}
-      </div>
-    </ThemesProvider>
+    <AuthProvider>
+      <UserProvider>
+        <ThemesProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className={`${poppins.className}`}>
+            <Navbar />
+            {children}
+          </div>
+        </ThemesProvider>
+      </UserProvider>
+    </AuthProvider>
   );
 };
+
+
 
 export default SiteLayout;
