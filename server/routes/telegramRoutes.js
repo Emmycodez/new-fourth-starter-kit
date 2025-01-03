@@ -42,8 +42,8 @@ bot.start(async (ctx) => {
 bot.action("no_i_don't", (ctx) => {});
 bot.action("yes_i_do", (ctx) => {
   const communtiyName = "Virtual Real Estate Community";
-  const monthlyPlan = "₦3,000";
-  const yearlyPlan = "₦30,000";
+  const monthlyPlan = "₦5,000";
+  const yearlyPlan = "₦50,000";
   try {
     ctx.reply(
       `Lovely😁, future community member! 🎉\n\nBeing part of the **${communtiyName}** comes with exciting perks and opportunities. To join, we have the following membership plans:\n\n💰 **monthly Plan:**${monthlyPlan}\n💰 **Yearly Plan:**${yearlyPlan} (Best Value!)\n\n👇 Kindly choose your payment plan below to get started:`,
@@ -229,14 +229,14 @@ bot.action("confirm_details", async (ctx) => {
       phone: userState.phoneNumber,
     };
 
-      // Encode custom data as a query parameter
-      const encodedCustomData = encodeURIComponent(JSON.stringify(customData));
+    // Encode custom data as a query parameter
+    const encodedCustomData = encodeURIComponent(JSON.stringify(customData));
 
-      // Build the payment URL dynamically
-      const url = payMonthly
-        ? `https://telegram-bot-custom-demo.lemonsqueezy.com/buy/134d7d0c-a594-4578-9abf-1ce9d08ad81d?custom_data=${encodedCustomData}`
-        : `https://telegram-bot-custom-demo.lemonsqueezy.com/buy/134d7d0c-a594-4578-9abf-1ce9d08ad81d?custom_data=${encodedCustomData}`;
-  
+    // Build the payment URL dynamically
+    const url = payMonthly
+      ? `https://telegram-bot-custom-demo.lemonsqueezy.com/buy/134d7d0c-a594-4578-9abf-1ce9d08ad81d?custom_data=${encodedCustomData}`
+      : `https://telegram-bot-custom-demo.lemonsqueezy.com/buy/134d7d0c-a594-4578-9abf-1ce9d08ad81d?custom_data=${encodedCustomData}`;
+
     await ctx.reply(
       `Thanks for confirming, ${userState.firstName} ${userState.lastName}! 🎉\nWe have your details saved. Please follow this url to make payment to gain access to the community👉:${url}`
     );
@@ -370,6 +370,7 @@ bot.on("new_chat_members", async (ctx) => {
   const groupName = ctx.chat?.title;
   const userTelegramId = ctx.from?.id;
   const newMember = ctx.message.new_chat_member;
+  const adminId = ctx.from?.id;
 
   console.log(
     "groupId: ",
@@ -383,8 +384,21 @@ bot.on("new_chat_members", async (ctx) => {
   );
 
   try {
-    ctx.reply();
-  } catch (error) {}
+    await ctx.reply(
+      "👋 Hi everyone! I'm the community bot for the Virtual Real Estate community. My role is to help manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community. 🤖💪\n\n" +
+        "I’m here to keep your group running smoothly and make sure that everyone is respected. If you have any questions or need assistance, feel free to reach out to the group admin!\n\n" +
+        "Let's keep things fun and friendly for everyone! 😄"
+    );
+
+    await ctx.telegram.sendMessage(
+      adminId,
+      `The bot has been added to the group ${groupName}🎉. It will help you manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community.\n\n` +
+        `If you have any questions or need assistance, feel free to reach out to me`
+    );
+  } catch (error) {
+    await ctx.reply(adminId, `There was an error adding the bot to the group ${groupName}. ${error.message}`)
+    console.error("Error in new chat member event:", error);
+  }
 });
 
 retry(() => bot.launch(), 5, 3000)
