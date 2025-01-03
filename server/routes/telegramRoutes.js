@@ -366,40 +366,95 @@ bot.action("change_phone_number", async (ctx) => {
 // Write create member logic here
 
 bot.on("new_chat_members", async (ctx) => {
-  const groupId = ctx.chat?.id;
-  const groupName = ctx.chat?.title;
-  const userTelegramId = ctx.from?.id;
-  const newMember = ctx.message.new_chat_member;
-  const adminId = ctx.from?.id;
+  const groupId = ctx.chat?.id; // ID of the group
+  const groupName = ctx.chat?.title; // Name of the group
+  const newMembers = ctx.message?.new_chat_members || []; // Array of new members
+  const adminId = ctx.from?.id; // ID of the user who added the bot (likely the admin)
 
-  console.log(
-    "groupId: ",
-    groupId,
-    "groupName: ",
-    groupName,
-    "userTelegramId: ",
-    userTelegramId,
-    "newMember: ",
-    newMember
-  );
+  for (const member of newMembers) {
+    console.log("New member detected:", member);
 
-  try {
-    await ctx.reply(
-      "👋 Hi everyone! I'm the community bot for the Virtual Real Estate community. My role is to help manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community. 🤖💪\n\n" +
-        "I’m here to keep your group running smoothly and make sure that everyone is respected. If you have any questions or need assistance, feel free to reach out to the group admin!\n\n" +
-        "Let's keep things fun and friendly for everyone! 😄"
-    );
+    // If the new member is the bot itself
+    if (member.id === ctx.botInfo.id) {
+      try {
+        // Send a message to the group
+        await ctx.reply(
+          "👋 Hi everyone! I'm the community bot for the Virtual Real Estate community. My role is to help manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community. 🤖💪\n\n" +
+            "I’m here to keep your group running smoothly and make sure that everyone is respected. If you have any questions or need assistance, feel free to reach out to the group admin!\n\n" +
+            "Let's keep things fun and friendly for everyone! 😄"
+        );
 
-    await ctx.telegram.sendMessage(
-      adminId,
-      `The bot has been added to the group ${groupName}🎉. It will help you manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community.\n\n` +
-        `If you have any questions or need assistance, feel free to reach out to me`
-    );
-  } catch (error) {
-    await ctx.reply(adminId, `There was an error adding the bot to the group ${groupName}. ${error.message}`)
-    console.error("Error in new chat member event:", error);
+        // Notify the admin
+        await ctx.telegram.sendMessage(
+          adminId,
+          `The bot has been added to the group "${groupName}" 🎉. It will help you manage subscriptions, enforce group rules, and ensure that no spammers make their way into your community.\n\n` +
+            `If you have any questions or need assistance, feel free to reach out to me.`
+        );
+      } catch (error) {
+        console.error("Error handling bot join event:", error);
+      }
+      continue; // Skip further processing for the bot
+    }
+
+    // For non-bot members, check subscription status
+    try {
+      const memberTelegramId = member.id; // Get the Telegram ID of the member
+      const memberData = await Member.findOne({ telegramId: memberTelegramId }); // Query the database
+
+      // Check if member data exists
+      if (!memberData) {
+        await ctx.telegram.kickChatMember(groupId, memberTelegramId);
+        await ctx.reply(
+          `🚫 User @${
+            member.username || member.first_name || "unknown"
+          } has been removed because they are not registered.`
+        );
+        continue;
+      }
+
+      // Recalculate subscription status based on dates
+      const now = new Date();
+      if (
+        !memberData.subscriptionExpiry ||
+        now > memberData.subscriptionExpiry
+      ) {
+        // Subscription expired
+        memberData.subscriptionStatus = "expired";
+        await memberData.save();
+
+        await ctx.telegram.kickChatMember(groupId, memberTelegramId);
+        await ctx.reply(
+          `🚫 User @${
+            member.username || member.first_name || "unknown"
+          } has been removed because their subscription has expired.`
+        );
+      } else if (memberData.subscriptionStatus !== "active") {
+        // Subscription is not active
+        await ctx.telegram.kickChatMember(groupId, memberTelegramId);
+        await ctx.reply(
+          `🚫 User @${
+            member.username || member.first_name || "unknown"
+          } has been removed because their subscription is not active.`
+        );
+      } else {
+        // Subscription is active
+        await ctx.reply(
+          `🎉 Welcome @${
+            member.username || member.first_name || "new member"
+          } to the group "${groupName}"! Your subscription is active.`
+        );
+      }
+    } catch (error) {
+      console.error(`Error handling new member ${member.id}:`, error);
+      await ctx.reply(
+        `⚠️ There was an issue processing the new member @${
+          member.username || member.first_name || "unknown"
+        }. Please contact the admin for assistance.`
+      );
+    }
   }
 });
+
 
 retry(() => bot.launch(), 5, 3000)
   .then(() => console.log("Bot launched successfully!"))
