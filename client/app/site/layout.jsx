@@ -2,8 +2,7 @@
 
 import { ThemesProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
-import { UserProvider } from "@/providers/UserProvider";
-import { AuthProvider } from "@/providers/AuthProvider";
+
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -12,27 +11,20 @@ const poppins = Poppins({
   display: "swap",
 });
 
-
 const SiteLayout = ({ children }) => {
   return (
-    <AuthProvider>
-      <UserProvider>
-        <ThemesProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className={`${poppins.className}`}>
-            <Navbar />
-            {children}
-          </div>
-        </ThemesProvider>
-      </UserProvider>
-    </AuthProvider>
+    <ThemesProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <div className={`${poppins.className}`}>
+        <Navbar />
+        {children}
+      </div>
+    </ThemesProvider>
   );
 };
-
-
 
 export default SiteLayout;
