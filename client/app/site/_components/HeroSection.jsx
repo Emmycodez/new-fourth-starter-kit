@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 
 const HeroSection = () => {
   return (
-    <section className="bg-gradient-to-b from-background to-secondary/10 py-20 sm:py-32">
+    <section className="bg-gradient-to-b from-background to-secondary/10  py-20 sm:py-32">
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center relative">
           <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl md:text-6xl lg:text-7xl">
