@@ -49,7 +49,7 @@ export default function DemoFormPage({ text, classname }) {
         <DialogHeader>
           <DialogTitle>Request Custom Demo</DialogTitle>
           <DialogDescription>
-            Send me a message and I'll get back to you so we can book a call
+            Send me a message and I&apos;ll get back to you so we can book a call
           </DialogDescription>
         </DialogHeader>
         <div>
