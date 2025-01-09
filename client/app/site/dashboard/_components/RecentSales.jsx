@@ -1,5 +1,5 @@
 import React from "react";
-import leads from "@/seed/leads";
+
 import { Ghost } from "lucide-react";
 
 const RecentSales = ({ limit,salesData }) => {
