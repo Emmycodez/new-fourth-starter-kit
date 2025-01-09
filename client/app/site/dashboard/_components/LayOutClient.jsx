@@ -18,7 +18,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import { ModeToggle } from "@/components/ModeToggle";
-import ConnectedCheck from "@/components/ConnectedCheck";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserNav } from "./UserNav";
 
@@ -77,9 +76,9 @@ export default function LayoutClient({ children, dashData }) {
             <ModeToggle />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
+        {/* <div className="flex flex-1 flex-col gap-4 p-4">
           <ConnectedCheck userData={dashData}>{children}</ConnectedCheck>
-        </div>
+        </div> */}
       </SidebarInset>
     </SidebarProvider>
   );
