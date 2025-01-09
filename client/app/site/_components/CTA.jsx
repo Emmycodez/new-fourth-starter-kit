@@ -6,9 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 import { ArrowRightToLine } from "lucide-react";
 import React from "react";
+import DemoFormPage from "./OutreachButton";
 
 const CTA = () => {
   return (
@@ -24,12 +25,10 @@ const CTA = () => {
           groups.
         </p>
         <div className="flex items-center justify-center mt-8">
-          <Button size="lg" className="text-lg w-full sm:w-auto" asChild>
-            <RegisterLink className="flex items-center justify-center">
-              Get Started
-              <ArrowRightToLine className="ml-2 h-5 w-5" />
-            </RegisterLink>
-          </Button>
+          <DemoFormPage
+            text={"I want My Bot"}
+            classname={"text-lg w-full sm:w-auto"}
+          />
         </div>
       </div>
     </section>
