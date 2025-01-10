@@ -52,7 +52,7 @@ const Intro = () => {
         </div>
       </div>
 
-      <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center text-center lg:max-w-3xl mb-[70px] mt-8">
+      <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center text-center lg:max-w-3xl mb-[70px] mt-[75px]">
         <h2 className="font-display font-bold tracking-tight text-4xl text-center">
           Would you want to see how our custom demo works? Check it out below
         </h2>
