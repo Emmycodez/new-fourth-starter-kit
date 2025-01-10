@@ -15,6 +15,7 @@ import Pricing from "./_components/Pricing";
 import PricingCalculator from "./_components/Pricing";
 import CTA from "./_components/CTA";
 import Footer from "./_components/Footer";
+import Intro from "./_components/Intro";
 
 const SitePage = () => {
   return (
@@ -25,6 +26,7 @@ const SitePage = () => {
       <Steps/>
       <UseCases/>
       <MeanToYou/>
+      <Intro/>
       <Analytics/>
       <PricingCalculator/>
       <CTA/>

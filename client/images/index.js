@@ -7,5 +7,6 @@ import atg from "./atg.png"
 import gsgs from "./gsgs.png"
 import sgp from "./sgp.png"
 import barchart from './barchart.png'
+import makerpic from './makerpic.jpg'
 
-export {logo, whatsapp, telegram, telegramj, heroImage, atg, gsgs, sgp, barchart}
+export {logo, whatsapp, telegram, telegramj, heroImage, atg, gsgs, sgp, barchart, makerpic}
