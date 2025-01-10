@@ -20,7 +20,7 @@ const Intro = () => {
           {/* Text Section */}
           <div className="space-y-4 text-center sm:text-left">
             <p className="text-lg font-medium">
-              Hey there, I'm Oamen Emmanuel. I am the creator of the Group
+              Hey there, I&apos;m Oamen Emmanuel. I am the creator of the Group
               Shepherd software and bot to help manage payment in Telegram
               communities.
             </p>
@@ -45,7 +45,7 @@ const Intro = () => {
           </p>
           <p>And so I set out to build a solution to solve this problem.</p>
           <p>
-            Group Shepherd isn't yet available for mass distribution, but we are
+            Group Shepherd isn&apos;t yet available for mass distribution, but we are
             currently building custom solutions and bots for individuals to
             manage their communities.
           </p>
