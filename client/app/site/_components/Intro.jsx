@@ -35,7 +35,7 @@ const Intro = () => {
         {/* Additional Paragraphs */}
         <div className="mt-8 space-y-4 text-sm sm:text-base  leading-relaxed max-w-3xl">
           <p>
-            They couldn't enforce payment rules and charge subscription payments
+            They couldn&pos;t enforce payment rules and charge subscription payments
             from members of their communities.
           </p>
           <p>
