@@ -1,15 +1,15 @@
 export function YouTubeVideo({ videoId, title = "YouTube video player" }) {
   return (
-    <div className="relative w-full aspect-video max-w-3xl mx-auto">
+    <div className="relative w-full  max-w-3xl mx-auto border-4 rounded-md border-foreground">
       <iframe
+        className=""
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/OLXFVDAdEjI?si=fVTd-oBkSwOm52d8"
-        title="YouTube video player"
-        frameborder="0"
+        src="https://www.youtube.com/embed/OLXFVDAdEjI?si=bwZNUAywqMK_yLPf"
+        title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </div>
   );
