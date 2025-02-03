@@ -10,7 +10,7 @@ import {
   makerpic,
   sgp,
 } from "@/images";
-import { CircleCheck } from "lucide-react";
+import { ArrowRightCircleIcon, CircleCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -141,7 +141,7 @@ const page = () => {
               <Image
                 src={makerpic}
                 alt="Oamen Emmanuel"
-                className="rounded-full border-black"
+                className="rounded-full border-black mb-5"
                 width={150}
                 height={100}
               />
@@ -169,8 +169,9 @@ const page = () => {
                 group management.
               </p>
               <p>
-                Our flagship tool, the Digital Real Estate Method, automates
-                your subscription model and manages the backend,
+                Our flagship tool,{" "}
+                <span className="font-semibold">the GroupShepherd bot</span>,
+                automates your subscription model and manages the backend,
               </p>
               <p>
                 so you can focus on growing your community and delivering value.
@@ -558,7 +559,7 @@ const page = () => {
                 digital products—courses, mentorship, ebooks, etc.—you often
                 need to:
               </p>
-              <p>Convince people why they need your trading.</p>
+              <p>Convince people why they need your trading knowledge.</p>
               <p>Prove the value of your specific knowledge.</p>
               <p>Build trust so they feel safe making a purchase.</p>
               <p>
@@ -574,11 +575,652 @@ const page = () => {
               <div className="text-center text-3xl font-bold"></div>
             </div>
           </div>
+          <div className="space-y-6 mt-[30px] py-6 px-8 border-dashed border-4 border-black shadow-lg">
+            <div className="text-3xl font-bold text-center text-red-600 ">
+              WHY <span style={{ color: "#0b3f71" }}>COMMUNITY MANAGEMENT</span>{" "}
+              IS <span className="text-gray-900">EVERGREEN</span>?
+            </div>
+            <p className="leading-6">
+              Paid communities are on the rise, especially in Nigeria. Whether
+              it&apos;s forex trading groups, mentorship programs, or niche
+              hobby groups, people are willing to pay to belong to spaces where
+              they can:
+            </p>
+            <div className="space-y-4 flex flex-col ">
+              <p>
+                Especially in the crypto space, while meme coins are on the rise
+              </p>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✔️</span>
+                <span className="text-gray-700 text-lg">Learn new skills.</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✔️</span>
+                <span className="text-gray-700 text-lg">
+                  Access exclusive information
+                </span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✔️</span>
+                <span className="text-gray-700 text-lg">
+                  Network with like-minded individuals.
+                </span>
+              </div>
+            </div>
+            <p>And here&apos; the proof:</p>
+
+            <p>
+              Paid membership communities are generating millions every year,
+              both globally and locally. Communities on platforms like Telegram
+              are thriving, with members happy to pay for the value they get
+            </p>
+          </div>
+          <div
+            style={{ backgroundColor: "#0b3f71" }}
+            className="space-y-6 mt-[50px] py-6 px-8 shadow-lg"
+          >
+            <div className="font-bold text-center text-white text-3xl p-4">
+              Why Group Shepherd is Your Best Choice
+            </div>
+            <div className="space-y-6 leading-6 text-white">
+              <p className="leading-6">
+                Unlike other tools or systems, Group Shepherd is designed
+                specifically for community managers who want to focus on
+                delivering value while leaving the admin work to automation.
+              </p>
+
+              <p>Here&apos;s what makes Group Shepherd unique:</p>
+
+              <div className="space-y-4">
+                {unique.map((item, index) => (
+                  <div key={index}>
+                    <div>
+                      <div className="font-semibold text-lg">{item.title}</div>
+                    </div>
+
+                    <p>{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6 mt-[50px] py-6 px-8 shadow-lg bg-gray-300 text-black">
+            <div className="font-bold text-3xl text-center p-4">
+              How Selling Subscriptions is Easier Than Ever
+            </div>
+            <div className="space-y-4 leading-6">
+              <p>
+                We&apos;ve spent months perfecting the tools and strategies that
+                allow community managers like you to focus on what you do best:
+                engage your audience.
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-cyan-400 mr-2"></span>
+                Everything else is already handled:
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-cyan-400 mr-2"></span>The
+                automation tools.
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-cyan-400 mr-2"></span>The
+                payment system.
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-cyan-400 mr-2"></span>The
+                member management system.
+              </p>
+              <p className="mt-2">
+                You don&apos;t have to worry about chasing payments or removing
+                inactive members. Group Shepherd does all of that on autopilot.
+              </p>
+              <p>
+                This means you can concentrate on creating value for your
+                community while enjoying a steady income stream.
+              </p>
+
+              <div className="mt-[50px] text-center font-bold text-2xl">
+                This is Your Plug-and-Play Community Monetization Tool
+              </div>
+              <p>
+                Imagine running a community where all you do is provide value,
+                while Group Shepherd handles:
+              </p>
+              <p>
+                {" "}
+                <span className="p-1 rounded-full bg-red-500 mr-2"></span>
+                Payments
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-red-500 mr-2"></span>Member
+                Verification
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-red-500 mr-2"></span>
+                Automated reminders
+              </p>
+              <p>
+                <span className="p-1 rounded-full bg-red-500 mr-2"></span>Access
+                enforcement for non-paying members
+              </p>
+            </div>
+          </div>
+          <div className="space-y-6 mt-[50px]">
+            <div className="font-bold text-center text-3xl text-blue-600 p-2">
+              Are You Ready to Monetize Your Community Effortlessly?
+            </div>
+            <p>
+              If you&apos;re ready to turn your community into a reliable source
+              of income with minimal effort, Group Shepherd is for you.
+            </p>
+            <p>Here&apos;s what you need to know before you start:</p>
+            <p className="font-semibold">1. You Need to Commit:</p>
+            <p>
+              This system works best for those who actively manage their
+              communities. It&apos;s not a “set and forget” tool.{" "}
+            </p>
+            <p>
+              You&apos;ll need to dedicate at least an hour each day to engage
+              with your group and provide value.
+            </p>
+            <p className="mt-4 font-semibold">
+              2. This is a Serious Opportunity:
+            </p>
+            <p>
+              When you sign up, you&apos;re committing to learning the process
+              and making it work.{" "}
+            </p>
+            <p>
+              If you&apos;re not ready to trust the system and see it through,
+              this isn&apos;t for you.
+            </p>
+          </div>
+          <div className="mt-[50px] space-y-4">
+            <p>
+              If you&apos;re ready to join a platform designed to simplify your
+              community management
+            </p>
+            <p>and help you earn consistently,</p>
+            <p className="font-semibold">
+              Group Shepherd is ready to welcome you.
+            </p>
+            <p className="font-semibold mt-5 py-4 text-2xl text-red-600">
+              Click below to start your journey
+            </p>
+            <button className="font-semibold text-2xl py-4 px-6 rounded-md text-white bg-blue-900 text-center w-full">
+              <div className="flex items-center justify-center">
+                Click Here To Register With Group Shepherd
+                <ArrowRightCircleIcon className="ml-2" />
+              </div>
+            </button>
+          </div>
+          <div className="space-y-6 mt-[70px]">
+            <div
+              style={{ backgroundColor: "#0b3f71" }}
+              className="text-2xl font-semibold text-white py-4 px-6 text-center rounded-md"
+            >
+              Here&apos;s What You&apos;re Getting When You Join Group Shepherd
+              Today…
+            </div>
+            <p className="font-semibold">Are you not loving this?...</p>
+            <p>
+              When you sign up for Group Shepherd, you&apos;re not just getting
+              software—you&apos;re getting a complete solution to transform how
+              you manage, monetize, and grow your paid Telegram communities.
+            </p>
+            <p>
+              From automated management to payment enforcement and hands-free
+              member tracking
+            </p>
+            <p>
+              Group Shepherd gives you everything you need to build a thriving,
+              profitable community.
+            </p>
+            <p className="text-3xl font-semibold text-center mt-4">
+              Here&apos;s What is Inside Your Group Shepherd Account
+            </p>
+            <div className="bg-gray-300 py-4 px-6  space-y-4">
+              <div className="h-[200px] flex items-center justify-start gap-4">
+                <div className="bg-red-500 h-full w-[7px]"></div>
+                <div>
+                  <p className="font-semibold text-lg mb-3">
+                    1. Automated Payment Enforcement
+                  </p>{" "}
+                  No more chasing payments or dealing with unpaid members. Group
+                  Shepherd automatically: Verifies member payments Tracks
+                  subscription statuses Removes non-paying or expired members
+                  immediately This means you can focus on running your
+                  community, knowing that every member in your group has paid
+                  their dues.
+                </div>
+              </div>
+              <div className="h-[200px] flex items-center justify-start gap-4">
+                <div className="bg-red-500 h-full w-[7px]"></div>
+                <div>
+                  <p className="font-semibold text-lg mb-3">
+                    2. Seamless Payment Processing
+                  </p>{" "}
+                  We&apos;ve partnered with Lemon Squeezy and paystack, two of
+                  the most trusted global payment processors, to ensure you can
+                  collect payments from over 130 countries, including Nigeria.
+                  Whether it&apos;s a debit card, credit card, or local bank
+                  transfer, we&apos;ve got you covered. Your funds are deposited
+                  directly into your account—no delays, no hassle.
+                </div>
+              </div>
+              <div className="h-[350px] flex items-center justify-start gap-4 mb-[100px]">
+                <div className="bg-red-500 h-full w-[7px]"></div>
+                <div>
+                  <p className="font-semibold text-lg mb-3">
+                    3. Member Analytics Dashboard
+                  </p>{" "}
+                  Stay in control with real-time insights into your community.
+                  With our intuitive dashboard, you&apos;ll be able to track:
+                  <div className="p-4 space-y-2">
+                    <p>Total active members</p>
+                    <p>Revenue generated</p>
+                    <p>Subscription renewals</p>
+                    <p>Membership churn rates</p>
+                    <p>
+                      These insights allow you to make data-driven decisions to
+                      grow your community faster.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="h-[400px] flex items-center justify-start gap- mt-[100px]">
+                <div className="bg-red-500 h-full w-[7px]"></div>
+                <div className="ml-4">
+                  <p className="font-semibold text-lg mb-3">
+                    4. Flexible Pricing Plans
+                  </p>{" "}
+                  We&apos;ve made it easy to scale, no matter the size of your
+                  community. Charge your members based on group size with these
+                  affordable pricing tiers:
+                  <div className="space-y-4 py-4 px-6 ">
+                    <p>10–50 Members: ₦3,000/month or ₦30,000/year</p>
+                    <p>51–100 Members: ₦5,000/month or ₦50,000/year</p>
+                    <p>101–250 Members: ₦10,000/month or ₦100,000/year</p>
+                    <p>251–500 Members: ₦15,000/month or ₦150,000/year</p>
+                    <p>501–1000 Members: ₦25,000/month or ₦250,000/year</p>
+                    <p>1001+ Members: Custom Pricing.</p>
+                    <p>
+                      This pricing structure ensures your community remains
+                      profitable as you grow.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="h-[400px] flex items-center justify-start gap- mt-[100px]">
+                <div className="bg-red-500 h-full w-[7px]"></div>
+                <div className="ml-4">
+                  <p className="font-semibold text-lg mb-3">
+                    5. Hassle-Free Member Management
+                  </p>{" "}
+                  With Group Shepherd, managing your community has never been
+                  easier. We handle:
+                  <div className="space-y-4 py-4 px-6 ">
+                    <p>
+                      <span className="font-semibold">Onboarding: </span> New
+                      members are seamlessly added after payment verification.
+                    </p>
+                    <p>
+                      <span className="font-semibold">Renewals: </span> Members
+                      are automatically reminded to renew before their
+                      subscription expires.
+                    </p>
+                    <p>
+                      <span className="font-semibold"> Removals:</span>
+                      Non-paying members are automatically removed, protecting
+                      the integrity of your group.
+                    </p>
+
+                    <p>
+                      This hands-free management ensures that your group remains
+                      organized, exclusive, and valuable to paying members.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-[70px]">
+            <div className="font-semibold text-xl">
+              And That&apos;s Not All! You&apos;re Also Getting These Exclusive
+              Bonuses When You Join Today:
+            </div>
+            <div className="space-y-6 mt-[60px] py-4 px-6">
+              <div className="space-y-4">
+                {bonuses.map((item, index) => (
+                  <div key={index} className="">
+                    <div className="p-4 font-semibold text-2xl  text-white bg-green-600">
+                      <div key={index}>{item.title}</div>
+                    </div>
+                    <div
+                      style={{ backgroundColor: "#0b3f71" }}
+                      className="text-white py-4 px-3 text-lg leading-7"
+                    >
+                      <div className="" key={index}>
+                        {item.body}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 leading-7 py-4 px-6 bg-gray-300 rounded-md">
+            <div className="py-4 px-6 font-semibold text-3xl">
+              Why Choose Group Shepherd?
+            </div>
+            <p>Recurring Income Opportunities</p>
+            <p>
+              Unlike one-time sales, Group Shepherd empowers you to build a
+              steady stream of recurring income through subscription-based
+              communities
+            </p>
+            <p>This means consistent revenue, month after month.</p>
+            <p>Your Members, Your Asset</p>
+            <p>
+              With Group Shepherd, you&apos;ll have full access to your member
+              database, including names, emails, and phone numbers.{" "}
+            </p>
+            <p>This allows you to:</p>
+            <p>
+              <span className="p-1 rounded-full bg-red-500 mr-2"></span>Build
+              stronger relationships with your members
+            </p>
+            <p>
+              <span className="p-1 rounded-full bg-red-500 mr-2"></span>Upsell
+              additional products or services
+            </p>
+            <p>
+              <span className="p-1 rounded-full bg-red-500 mr-2"></span>Create
+              more personalized experiences
+            </p>
+            <p>Weekly Payouts to Your Bank Account</p>
+            <p>
+              Every Monday is payday. No delays, no deductions—just your
+              hard-earned income directly in your preferred bank account.
+            </p>
+          </div>
+          <div className="space-y-4 leading-7 py-4 px-6 bg-gray-100 rounded-md mt-[30px]">
+            <div className="text-3xl text-center">
+              “Okay Emmanuel , I&apos;m In! I Love Everything I&apos;ve Heard So
+              Far. . . I Want to Sign Up Right Now. How Much Will It Cost Me to
+              Use Group Shepherd?”
+            </div>
+            <p>If that&apos;s the case, here&apos;s what you must know.</p>
+            <p>
+              Normally, a tool like Group Shepherd, with its level of automation
+              and efficiency, could easily cost ₦250,000 or more per year, and
+              it&apos;d still be a bargain.
+            </p>
+            <p>
+              After all, we&apos;ve invested countless hours perfecting this
+              system to ensure managing and monetizing your Telegram group
+              becomes effortless and profitable.
+            </p>
+            <p>With Group Shepherd, you&apos;ll have a system that:</p>
+            <p>
+              <span className="p-1 rounded-full bg-red-700 mr-2"></span>
+              Automatically enforces payments so you’ll never have to worry
+              about unpaid members again.
+            </p>
+            <p>
+              {" "}
+              <span className="p-1 rounded-full bg-red-700 mr-2"></span>Saves
+              you hours of manual admin work every week.
+            </p>
+            <p>
+              <span className="p-1 rounded-full bg-red-700 mr-2"></span>
+              Helps you earn more consistently by ensuring only paying members
+              remain in your group.
+            </p>
+            <p>And you&apos;ll also gain access to:</p>
+            <p>
+              {" "}
+              <span className="p-1 rounded-full bg-blue-700 mr-2"></span>A clear
+              analytics dashboard to track your growth and revenue.
+            </p>
+            <p>
+              {" "}
+              <span className="p-1 rounded-full bg-blue-700 mr-2"></span>Support
+              and guidance to help you get the most out of the platform.
+            </p>
+            <p>
+              {" "}
+              <span className="p-1 rounded-full bg-blue-700 mr-2"></span>
+              Exclusive bonuses to grow and scale your community faster.
+            </p>
+            <p className="font-semibold mt-2">
+              So even if I priced this at ₦250,000, it&apos;d still be a steal,
+              compared to what Group Shepherd will do for your paid community.
+            </p>
+          </div>
+          <div className="space-y-4 leading-7 py-4 px-6 bg-gray-100 rounded-md mt-[30px]">
+            <p className="text-2xl">
+              {" "}
+              However, we know not everyone managing a community can afford
+              ₦250,000 upfront.
+            </p>
+            <p>
+              {" "}
+              That&apos;s why we&apos;ve made the investment affordable,
+              especially for those looking to grow their communities and build a
+              reliable source of income.
+            </p>
+            <p> If you&apos;re ready to get started today… </p>
+            <p>
+              {" "}
+              You won&apos;t pay anywhere close to ₦250,000 or even ₦100,000.
+            </p>
+            <p>Your investment?</p>
+            <p>It starts at just:</p>
+            <p className="font-bold">
+              ₦3,000/month or ₦30,000/year for groups with 10–50 members.
+            </p>
+            <p>
+              As your group grows, you can easily upgrade to the next tier. This
+              means you only pay based on the size of your group. Fair, right?
+            </p>
+            <p>
+              And remember, no extra fees or hidden charges. You&apos;re in
+              control.
+            </p>
+            <p className="font-semibold text-lg text-center m-[50px] text-red-600">
+              Once your payment is processed, you&apos;ll get immediate access
+              to everything I&apos;ve promised today.
+            </p>
+            <p>To recap, here&apos;s what you get:</p>
+            <p>
+              {" "}
+              <span className="block mb-2 ">
+                <span className="text-green-500 mr-2 rounded-full bg-white p-2">
+                  ✅
+                </span>
+                <span className="text-xl font-semibold text-black ">
+                  Group Shepherd Subscription{" "}
+                </span>
+              </span>
+              All the automation and payment enforcement tools you need to run
+              your community with zero stress.
+            </p>
+            <p>
+              {" "}
+              <span className="block mb-2 ">
+                <span className="text-green-500 mr-2 rounded-full bg-white p-2">
+                  ✅
+                </span>
+                <span className="text-xl font-semibold text-black ">
+                  Community Growth Blueprint
+                </span>
+              </span>
+              A step-by-step guide to grow and monetize your Telegram group.
+            </p>
+            <p>
+              {" "}
+              <span className="block mb-2 ">
+                <span className="text-green-500 mr-2 rounded-full bg-white p-2">
+                  ✅
+                </span>
+                <span className="text-xl font-semibold text-black ">
+                  Access to Our Support Community
+                </span>
+              </span>
+              Join other successful community owners, share strategies, and
+              learn from each other.
+            </p>
+            <p>
+              {" "}
+              <span className="block mb-2 ">
+                <span className="text-green-500 mr-2 rounded-full bg-white p-2">
+                  ✅
+                </span>
+                <span className="text-xl font-semibold text-black ">
+                  Referral Bonuses
+                </span>
+              </span>
+              Earn 20% recurring commissions for every referral.
+            </p>
+            <p>
+              {" "}
+              <span className="block mb-2 ">
+                <span className="text-green-500 mr-2 rounded-full bg-white p-2">
+                  ✅
+                </span>
+                <span className="text-xl font-semibold text-black ">
+                  Dedicated Support
+                </span>
+              </span>
+              Get answers to your questions whenever you need help.
+            </p>
+            <p className="font-semibold text-xl mb-[30px] ">
+              All of this for as low as ₦3,000 per month.
+            </p>
+            <p className="mt-[100px]">
+              You can easily make that back within your first week by adding
+              just one or two paying members to your group.
+            </p>
+            <p>
+              This isn&apos;t just a tool—it&apos;s a system designed to help
+              you build and grow a profitable community while saving time.
+            </p>
+          </div>
+          <div className="bg-cyan-200 border-dashed border-4 border-red-600 py-6 px-8 font-semibold text-2xl text-center">
+            It&apos;s about Having a reliable income source every month Spending
+            less time on admin tasks and more time growing your business.
+            Building a community that not only thrives but also generates
+            consistent revenue.
+          </div>
+          <div className="space-y-4 leading-7 mt-[30px]">
+            <p>
+              If that&apos;s what you want, I&apos;m confident Group Shepherd
+              will get you there faster than anything else you&apos;ve tried in
+              the past.
+            </p>
+            <p>But remember, this offer is available right now.</p>
+            <p>
+              I&apos;m not going to hit you with fake scarcity tactics or
+              deadlines. However, prices may change in the future as the
+              platform evolves, so it&apos;s always best to secure your spot
+              now.
+            </p>
+            <p>
+              If you&apos;re ready to transform the way you manage and monetize
+              your Telegram group…
+            </p>
+            <p className="font-semibold text-2xl">
+              Click the button below to get started.
+            </p>
+            <button className="font-semibold text-2xl py-4 px-6 rounded-md text-white bg-blue-900 text-center w-full">
+              <div className="flex items-center justify-center">
+                Click Here To Register With Group Shepherd
+                <ArrowRightCircleIcon className="ml-2" />
+              </div>
+            </button>
+            <p> See you on the other side</p>
+            <p> Oamen Emmanuel</p>
+          </div>
         </div>
       </div>
     </main>
   );
 };
+
+const bonuses = [
+  {
+    title: "Bonus #1: Community Growth Blueprint",
+    body: "       This comprehensive guide is packed with actionable steps to help you: Build a community that attracts paying members, Run engaging activities like weekly challenges, Q&A sessions, and case study reviews Retain your members with content they can't get anywhere else Even if you're starting from scratch, this blueprint will show you how to create a thriving, income-generating community.",
+  },
+  {
+    title: "Bonus #2: Pre-Built Marketing Templates",
+    body: "No marketing experience? No problem. You’ll receive: Ready-to-use social media posts, High-converting ad copy, Pre-written email campaigns, Follow-up scripts to close more sales. These templates are designed to help you attract paying members to your community without having to spend hours figuring out what to say or how to say it.",
+  },
+  {
+    title: "Bonus #3: 6 Weeks Coaching Sessions",
+    body: "Every week, we host live coaching calls and Q&A sessions where you can:Ask questions specific to your community goals, Learn advanced strategies for maximizing your income. Get personalized advice from our expert team These sessions are your chance to receive one-on-one support and guidance to ensure your success",
+  },
+  {
+    title: "Bonus #4: Member Referral Program",
+    body: "Want to earn more income? Group Shepherd’s referral program makes it easy. Here’s how it works:Share your unique referral link with other group owners. Earn 20% recurring commissions for the lifetime of their account This bonus income is a simple way to grow your revenue alongside your community",
+  },
+  {
+    title: "Bonus #5: Exclusive Telegram Support Community",
+    body: "When you join Group Shepherd, you become part of our partners-only Telegram group. Inside, you’ll: Get real-time support from our dedicated team, Collaborate with other community owners, Share strategies, insights, and success stories. This community is your go-to resource for scaling your group and increasing your income.",
+  },
+];
+const insideAccount = [
+  {
+    title: "Automated Payment Enforcement",
+    body: "No more chasing payments or dealing with unpaid members. Group Shepherd automatically Verifies member payment Tracks subscription statusesRemoves non-paying or expired members immediately This means you can focus on running your community, knowing that every member in your group has paid their dues",
+  },
+  {
+    title: "Seamless Payment Processing",
+    body: "We’ve partnered with Lemon Squeezy, one of the most trusted global payment processors, to ensure you can collect payments from over 130 countries, including Nigeria. Whether it’s a debit card, credit card, or local bank transfer, we’ve got you covered.Your funds are deposited directly into your account—no delays, no hassle",
+  },
+  {
+    title: ". Member Analytics Dashboard",
+    body: "Stay in control with real-time insights into your community. With our intuitive dashboard, you’ll be able to track:Total active membersRevenue generatedSubscription renewalsMembership churn rates These insights allow you to make data-driven decisions to grow your community faster.",
+  },
+  {
+    title: "Flexible Pricing Plans",
+    body: "We’ve made it easy to scale, no matter the size of your community. Charge your members based on group size with these affordable pricing tiers:10–50 Members: ₦3,000/month or ₦30,000/year51–100 Members: ₦5,000/month or ₦50,000/year101–250 Members: ₦10,000/month or ₦100,000/year251–500 Members: ₦15,000/month or ₦150,000/year501–1000 Members: ₦25,000/month or ₦250,000/year1001+ Members: Custom Pricing.This pricing structure ensures your community remains profitable as you grow.",
+  },
+  {
+    title: "Hassle-Free Member Management",
+    body: "With Group Shepherd, managing your community has never been easier. We handle:Onboarding: New members are seamlessly added after payment verification.Renewals: Members are automatically reminded to renew before their subscription expires.Removals: Non-paying members are automatically removed, protecting the integrity of your group.",
+  },
+];
+
+const unique = [
+  {
+    title: "Automation:",
+    body: "Group Shepherd handles subscription payments, member verification, and payment enforcement seamlessly. No manual intervention is needed.",
+  },
+  {
+    title: "Flexibility:",
+    body: "Set your own subscription fees — whether it’s ₦5,000/month or ₦50,000/year, you’re in full control.",
+  },
+  {
+    title: "Reliability:",
+    body: "With integrations for secure payments (e.g., Lemon Squeezy), Group Shepherd ensures transactions are smooth and hassle-free.",
+  },
+  {
+    title: "Customer Focus:",
+    body: "Your community members get automatic reminders when payments are due, ensuring a frictionless experience.",
+  },
+  {
+    title: "Scalability:",
+    body: "Whether your group has 10 members or 10,000, Group Shepherd grows with you.",
+  },
+  {
+    title: "Marketing Expertise:",
+    body: "Our marketing team will help you with your offers, marketing materials and fliers through our Digital Real estate funnel system",
+  },
+];
 
 const features = [
   "We’ve automated your subscription management: Members are billed automatically, and those who don’t pay are removed from your group without you lifting a finger.",
