@@ -12,6 +12,7 @@ import {
 } from "@/images";
 import { ArrowRightCircleIcon, CircleCheck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const pointete = [
@@ -102,8 +103,8 @@ const page = () => {
           </div>
         </div>
         <div className="rounded-md text-white bg-blue-400 text-center font-semibold py-4 px-6  md:w-[700px] w-[400px] mx-auto center">
-          "We Call It the 'Digital Real Estate Method' and it will Blow Your
-          Mind.
+          We Call It the &quot;Digital Real Estate Method&quot; and it will Blow
+          Your Mind.
         </div>
         <div className="text-center mt-4 italic font-semibold mb-[10px]">
           No Technical Skill or Previous Experience Required.{" "}
@@ -114,13 +115,14 @@ const page = () => {
         <div className="space-y-4 text-left py-6 px-4 bg-gray-100 text-gray-900 leading-7 text-lg max-w-[900px] md:max-w-[1200px]">
           <p className="text-lg font-bold">Hi, </p>
           <p>
-            If you're looking for a way to turn your Telegram trading group into
-            a profitable trading academy making 100s of thousands of naira every
-            single month, then i have one word for you{" "}
+            If you&apos;re looking for a way to turn your Telegram trading group
+            into a profitable trading academy making 100s of thousands of naira
+            every single month, then i have one word for you{" "}
             <span className="font-semibold">DIGITAL REAL ESTATE</span>
           </p>{" "}
           <p className="font-bold">
-            In case you don't know what the Digital Real estate is, it means
+            In case you don&apos;t know what the Digital Real estate is, it
+            means
           </p>
           <p className="text-xl font-semibold text-blue-700">
             Having an Asset online that generates monthly recurring revenue for
@@ -490,7 +492,7 @@ const page = () => {
         </div>
         <div className="mt-4 py-4 px-6 text-gray-900 ">
           <div className="text-4xl font-bold text-center underline">
-            Here's How It Works.....
+            Here&apos;s How It Works.....
           </div>
           <p className="mt-5 font-semibold text-md">
             Heres how your dashboard will look....
@@ -749,8 +751,14 @@ const page = () => {
             </p>
             <button className="font-semibold text-2xl py-4 px-6 rounded-md text-white bg-blue-900 text-center w-full">
               <div className="flex items-center justify-center">
-                Click Here To Register With Group Shepherd
-                <ArrowRightCircleIcon className="ml-2" />
+                <Link
+                  href="https://wa.link/l1iqim"
+                  className="flex items-center justify-center"
+                >
+                  {" "}
+                  Click Here To Register With Group Shepherd
+                  <ArrowRightCircleIcon className="ml-2" />
+                </Link>
               </div>
             </button>
           </div>
@@ -1137,8 +1145,14 @@ const page = () => {
             </p>
             <button className="font-semibold text-2xl py-4 px-6 rounded-md text-white bg-blue-900 text-center w-full">
               <div className="flex items-center justify-center">
-                Click Here To Register With Group Shepherd
-                <ArrowRightCircleIcon className="ml-2" />
+                <Link
+                  href="https://wa.link/l1iqim"
+                  className="flex items-center justify-center"
+                >
+                  {" "}
+                  Click Here To Register With Group Shepherd
+                  <ArrowRightCircleIcon className="ml-2" />
+                </Link>
               </div>
             </button>
             <p> See you on the other side</p>
